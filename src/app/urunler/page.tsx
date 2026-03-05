@@ -10,6 +10,7 @@ import {
   Phone,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Ürünler",
@@ -36,6 +37,7 @@ const productCategories = [
     id: "su-yalitimi",
     icon: Droplets,
     title: "Su Yalıtımı",
+    photo: "/products/su-yalitimi.jpg",
     desc: "Binaları su hasarından koruyan yüksek performanslı yalıtım çözümleri.",
     products: [
       "Bitümlü Su Yalıtım Membranları",
@@ -52,6 +54,7 @@ const productCategories = [
     id: "isi-yalitimi",
     icon: Layers,
     title: "Isı Yalıtımı",
+    photo: "/products/isi-yalitimi.jpg",
     desc: "Enerji tasarrufu sağlayan, TSE belgeli ısı yalıtım malzemeleri.",
     products: [
       "EPS (Strafor) Levhalar",
@@ -68,6 +71,7 @@ const productCategories = [
     id: "boya",
     icon: Paintbrush,
     title: "Boya",
+    photo: "/products/boya.jpg",
     desc: "İç ve dış mekanlar için premium kalitede boya çözümleri.",
     products: [
       "İç Cephe Boyaları",
@@ -84,6 +88,7 @@ const productCategories = [
     id: "yapi-kimyasallari",
     icon: FlaskConical,
     title: "Yapı Kimyasalları",
+    photo: "/products/yapi-kimyasallari.jpg",
     desc: "Yapıların dayanıklılığını artıran kimyasal çözümler.",
     products: [
       "Fayans Yapıştırıcıları",
@@ -100,6 +105,7 @@ const productCategories = [
     id: "alci-siva",
     icon: Hammer,
     title: "Alçı & Sıva",
+    photo: "/products/alci-siva.jpg",
     desc: "İç mekan düzenleme ve kaplama için alçı ve sıva ürünleri.",
     products: [
       "Makine Sıvası",
@@ -116,6 +122,7 @@ const productCategories = [
     id: "yapi-levhalari",
     icon: Building2,
     title: "Yapı Levhaları",
+    photo: "/products/yapi-levhalari.jpg",
     desc: "Bölme duvar, asma tavan ve kaplama için yapı levhaları.",
     products: [
       "Standart Alçıpan",
@@ -138,16 +145,25 @@ function CategorySection({
   return (
     <section id={cat.id} className="scroll-mt-24">
       <div className="bg-card rounded border border-border overflow-hidden hover:shadow-lg transition-shadow">
-        <div className="p-8 md:p-10">
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-14 h-14 rounded-sm bg-accent/10 flex items-center justify-center">
-              <cat.icon size={28} className="text-accent" />
+        <div className="relative h-56 md:h-64 overflow-hidden">
+          <Image
+            src={cat.photo}
+            alt={cat.title}
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+          <div className="absolute bottom-6 left-8 md:left-10 flex items-center gap-4">
+            <div className="w-12 h-12 rounded-sm bg-white/20 backdrop-blur-sm flex items-center justify-center">
+              <cat.icon size={24} className="text-white" />
             </div>
             <div>
-              <h2 className="text-2xl font-bold">{cat.title}</h2>
-              <p className="text-muted text-sm">{cat.desc}</p>
+              <h2 className="text-2xl font-bold text-white">{cat.title}</h2>
+              <p className="text-white/70 text-sm">{cat.desc}</p>
             </div>
           </div>
+        </div>
+        <div className="p-8 md:p-10">
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
             {cat.products.map((p) => (

@@ -103,12 +103,12 @@ function Advantages() {
 
 /* ───────────── ÜRÜN KATEGORİLERİ ───────────── */
 const categories = [
-  { icon: Droplets, title: "Su Yalıtımı", desc: "Membranlar, mastik ve su tutucu sistemler", id: "su-yalitimi" },
-  { icon: Layers, title: "Isı Yalıtımı", desc: "EPS, XPS, taş yünü ve cam yünü", id: "isi-yalitimi" },
-  { icon: Paintbrush, title: "Boya", desc: "İç cephe, dış cephe ve endüstriyel boyalar", id: "boya" },
-  { icon: FlaskConical, title: "Yapı Kimyasalları", desc: "Yapıştırıcı, derz dolgu ve katkılar", id: "yapi-kimyasallari" },
-  { icon: Hammer, title: "Alçı & Sıva", desc: "Alçıpan, sıva ve dekoratif ürünler", id: "alci-siva" },
-  { icon: Building2, title: "Yapı Levhaları", desc: "Alçıpan, OSB ve çimento levhalar", id: "yapi-levhalari" },
+  { icon: Droplets, title: "Su Yalıtımı", desc: "Membranlar, mastik ve su tutucu sistemler", id: "su-yalitimi", photo: "/products/su-yalitimi.jpg" },
+  { icon: Layers, title: "Isı Yalıtımı", desc: "EPS, XPS, taş yünü ve cam yünü", id: "isi-yalitimi", photo: "/products/isi-yalitimi.jpg" },
+  { icon: Paintbrush, title: "Boya", desc: "İç cephe, dış cephe ve endüstriyel boyalar", id: "boya", photo: "/products/boya.jpg" },
+  { icon: FlaskConical, title: "Yapı Kimyasalları", desc: "Yapıştırıcı, derz dolgu ve katkılar", id: "yapi-kimyasallari", photo: "/products/yapi-kimyasallari.jpg" },
+  { icon: Hammer, title: "Alçı & Sıva", desc: "Alçıpan, sıva ve dekoratif ürünler", id: "alci-siva", photo: "/products/alci-siva.jpg" },
+  { icon: Building2, title: "Yapı Levhaları", desc: "Alçıpan, OSB ve çimento levhalar", id: "yapi-levhalari", photo: "/products/yapi-levhalari.jpg" },
 ];
 
 function Products() {
@@ -127,14 +127,27 @@ function Products() {
             <Link
               href={`/urunler#${cat.id}`}
               key={cat.title}
-              className="group bg-white rounded-sm p-7 border border-border hover:border-accent/30 hover:shadow-md transition-all"
+              className="group bg-white rounded-sm border border-border hover:border-accent/30 hover:shadow-md transition-all overflow-hidden"
             >
-              <cat.icon size={28} className="text-secondary group-hover:text-accent transition-colors" />
-              <h3 className="text-lg font-semibold mt-4">{cat.title}</h3>
-              <p className="text-muted text-sm mt-2">{cat.desc}</p>
-              <span className="inline-flex items-center gap-1 text-accent text-sm font-medium mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                İncele <ChevronRight size={14} />
-              </span>
+              <div className="relative h-48 overflow-hidden">
+                <Image
+                  src={cat.photo}
+                  alt={cat.title}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                <div className="absolute bottom-3 left-4">
+                  <cat.icon size={20} className="text-white" />
+                </div>
+              </div>
+              <div className="p-6">
+                <h3 className="text-lg font-semibold">{cat.title}</h3>
+                <p className="text-muted text-sm mt-2">{cat.desc}</p>
+                <span className="inline-flex items-center gap-1 text-accent text-sm font-medium mt-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                  İncele <ChevronRight size={14} />
+                </span>
+              </div>
             </Link>
           ))}
         </div>
