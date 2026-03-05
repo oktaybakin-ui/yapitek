@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
     template: "%s | YapıTek",
   },
   description:
-    "YapıTek Yapı Malzemeleri - Yalıtım, Boya, Alçı, Yapı Kimyasalları ve daha fazlası. Türkiye'nin güvenilir yapı malzemeleri tedarikçisi.",
+    "YapıTek Taah. Yapı Malzemeleri Tic. Ltd. Şti. - Yalıtım, Boya, Alçı, Yapı Kimyasalları. Türkiye'nin güvenilir yapı malzemeleri tedarikçisi.",
 };
 
 export default function RootLayout({
@@ -36,6 +37,7 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
+        <WhatsAppButton />
       </body>
     </html>
   );

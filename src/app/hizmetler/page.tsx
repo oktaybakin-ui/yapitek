@@ -136,7 +136,7 @@ function Process() {
     <section className="py-20 bg-accent text-white">
       <div className="mx-auto max-w-7xl px-6">
         <div className="text-center mb-14">
-          <span className="font-semibold text-sm uppercase tracking-wider text-[#EAECE3]">
+          <span className="font-semibold text-sm uppercase tracking-wider text-white/80">
             Nasıl Çalışıyoruz?
           </span>
           <h2 className="text-3xl md:text-4xl font-bold mt-2">
@@ -146,7 +146,7 @@ function Process() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {steps.map((s) => (
             <div key={s.num} className="text-center">
-              <div className="text-5xl font-bold text-[#EAECE3]/30 mb-4">
+              <div className="text-5xl font-bold text-white/80/30 mb-4">
                 {s.num}
               </div>
               <h3 className="text-lg font-semibold mb-2">{s.title}</h3>

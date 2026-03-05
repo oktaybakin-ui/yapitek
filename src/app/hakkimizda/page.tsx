@@ -147,7 +147,7 @@ function WhyUs() {
     <section className="py-20 bg-accent text-white">
       <div className="mx-auto max-w-7xl px-6 grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
         <div>
-          <span className="font-semibold text-sm uppercase tracking-wider text-[#EAECE3]">
+          <span className="font-semibold text-sm uppercase tracking-wider text-white/80">
             Neden YapıTek?
           </span>
           <h2 className="text-3xl md:text-4xl font-bold mt-2">
@@ -162,7 +162,7 @@ function WhyUs() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {reasons.map((r) => (
             <div key={r} className="flex items-start gap-3 bg-white/10 rounded-lg p-4">
-              <CheckCircle size={20} className="text-[#EAECE3] shrink-0 mt-0.5" />
+              <CheckCircle size={20} className="text-white/80 shrink-0 mt-0.5" />
               <span className="text-sm">{r}</span>
             </div>
           ))}
@@ -172,11 +172,42 @@ function WhyUs() {
   );
 }
 
+/* ───────────── KURUCU ───────────── */
+function Founder() {
+  return (
+    <section className="py-20 bg-background">
+      <div className="mx-auto max-w-7xl px-6 grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+        <div className="relative">
+          <div className="aspect-square max-w-md mx-auto bg-gradient-to-br from-secondary/10 to-secondary/5 rounded-lg flex items-center justify-center">
+            <Users size={80} className="text-secondary/20" />
+          </div>
+        </div>
+        <div>
+          <span className="text-accent font-semibold text-sm uppercase tracking-wider">
+            Kurucu
+          </span>
+          <h2 className="text-3xl font-bold mt-2">Mustafa Yılmaz</h2>
+          <p className="text-muted mt-5 leading-relaxed">
+            YapıTek Taah. Yapı Malzemeleri&apos;nin kurucusu Mustafa Yılmaz,
+            yapı sektöründe 15 yılı aşkın deneyime sahiptir. Sektördeki
+            derin bilgi birikimi ve vizyoner yaklaşımıyla YapıTek&apos;i
+            Türkiye&apos;nin güvenilir yapı malzemeleri tedarikçilerinden
+            biri haline getirmiştir.
+          </p>
+          <p className="text-muted mt-4 leading-relaxed">
+            Müşteri memnuniyetini ve kaliteyi iş felsefesinin merkezine
+            koyan Mustafa Yılmaz, firmanın sürdürülebilir büyümesi ve
+            sektörel gelişimi için çalışmalarına devam etmektedir.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ───────────── EKİP ───────────── */
 const team = [
-  { name: "Ahmet Yılmaz", role: "Genel Müdür", icon: Users },
-  { name: "Mehmet Kaya", role: "Satış Müdürü", icon: TrendingUp },
-  { name: "Ayşe Demir", role: "Teknik Müdür", icon: Award },
+  { name: "Mustafa Yılmaz", role: "Kurucu / Genel Müdür", icon: Users },
 ];
 
 function Team() {
@@ -217,7 +248,7 @@ export default function HakkimizdaPage() {
       <AboutContent />
       <MissionVision />
       <WhyUs />
-      <Team />
+      <Founder />
       {/* CTA */}
       <section className="py-16 bg-background">
         <div className="mx-auto max-w-4xl px-6 text-center">

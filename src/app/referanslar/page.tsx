@@ -186,7 +186,7 @@ function Testimonials() {
     <section className="py-20 bg-accent text-white">
       <div className="mx-auto max-w-7xl px-6">
         <div className="text-center mb-14">
-          <span className="font-semibold text-sm uppercase tracking-wider text-[#EAECE3]">
+          <span className="font-semibold text-sm uppercase tracking-wider text-white/80">
             Müşteri Yorumları
           </span>
           <h2 className="text-3xl md:text-4xl font-bold mt-2">

@@ -2,18 +2,19 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Phone,
   Mail,
   Clock,
   Menu,
   X,
-  ArrowRight,
+  ChevronRight,
 } from "lucide-react";
 
 const navLinks = [
   { href: "/", label: "Ana Sayfa" },
-  { href: "/hakkimizda", label: "Hakkımızda" },
+  { href: "/hakkimizda", label: "Kurumsal" },
   { href: "/urunler", label: "Ürünler" },
   { href: "/hizmetler", label: "Hizmetler" },
   { href: "/hesaplama", label: "Hesaplama" },
@@ -25,96 +26,100 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-accent text-white shadow-md">
-      {/* Üst bar */}
-      <div className="hidden lg:block border-b border-white/10">
-        <div className="mx-auto max-w-7xl px-6 flex items-center justify-between text-sm py-2">
+    <header className="sticky top-0 z-50 shadow-sm">
+      {/* Üst bilgi çubuğu */}
+      <div className="hidden lg:block bg-foreground text-white/80 text-xs">
+        <div className="mx-auto max-w-7xl px-6 flex items-center justify-between py-2">
           <div className="flex items-center gap-6">
-            <span className="flex items-center gap-1.5">
-              <Phone size={14} />
-              <a href="tel:+902121234567" className="hover:underline">
-                0212 123 45 67
-              </a>
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Mail size={14} />
-              <a href="mailto:info@yapitek.com" className="hover:underline">
-                info@yapitek.com
-              </a>
-            </span>
+            <a href="tel:+902121234567" className="flex items-center gap-1.5 hover:text-white transition-colors">
+              <Phone size={12} />
+              0212 123 45 67
+            </a>
+            <a href="mailto:info@yapitek.com" className="flex items-center gap-1.5 hover:text-white transition-colors">
+              <Mail size={12} />
+              info@yapitek.com
+            </a>
           </div>
           <div className="flex items-center gap-1.5">
-            <Clock size={14} />
-            <span>Pzt - Cmt: 08:00 - 18:00</span>
+            <Clock size={12} />
+            Pzt - Cmt: 08:00 - 18:00
           </div>
         </div>
       </div>
 
-      {/* Ana navbar */}
-      <nav className="mx-auto max-w-7xl px-6 flex items-center justify-between h-16">
-        <Link href="/" className="text-2xl font-bold tracking-tight">
-          Yapı<span className="text-[#EAECE3]">Tek</span>
-        </Link>
+      {/* Ana navigasyon */}
+      <nav className="bg-white border-b border-border">
+        <div className="mx-auto max-w-7xl px-6 flex items-center justify-between h-20">
+          <Link href="/" className="shrink-0">
+            <Image
+              src="/logo.png"
+              alt="YapıTek Yapı Malzemeleri"
+              width={160}
+              height={48}
+              className="h-12 w-auto"
+              priority
+            />
+          </Link>
 
-        <ul className="hidden lg:flex items-center gap-7 text-sm font-medium">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className="hover:text-[#EAECE3] transition-colors"
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-
-        <Link
-          href="/iletisim"
-          className="hidden lg:inline-flex items-center gap-2 bg-[#EAECE3] text-accent px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-white transition-colors"
-        >
-          Teklif Al
-          <ArrowRight size={16} />
-        </Link>
-
-        {/* Mobil menü butonu */}
-        <button
-          className="lg:hidden"
-          aria-label="Menü"
-          onClick={() => setMobileOpen(!mobileOpen)}
-        >
-          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </nav>
-
-      {/* Mobil menü */}
-      {mobileOpen && (
-        <div className="lg:hidden bg-accent border-t border-white/10">
-          <ul className="flex flex-col px-6 py-4 gap-3 text-sm font-medium">
+          <ul className="hidden lg:flex items-center gap-8 text-sm font-medium text-foreground">
             {navLinks.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="block py-2 hover:text-[#EAECE3] transition-colors"
-                  onClick={() => setMobileOpen(false)}
+                  className="hover:text-accent transition-colors py-2"
                 >
                   {link.label}
                 </Link>
               </li>
             ))}
-            <li className="pt-2">
-              <Link
-                href="/iletisim"
-                className="inline-flex items-center gap-2 bg-[#EAECE3] text-accent px-5 py-2.5 rounded-lg text-sm font-semibold"
-                onClick={() => setMobileOpen(false)}
-              >
-                Teklif Al
-                <ArrowRight size={16} />
-              </Link>
-            </li>
           </ul>
+
+          <Link
+            href="/iletisim"
+            className="hidden lg:inline-flex items-center gap-2 bg-accent text-white px-5 py-2.5 rounded text-sm font-semibold hover:bg-accent-dark transition-colors"
+          >
+            Teklif Al
+            <ChevronRight size={15} />
+          </Link>
+
+          <button
+            className="lg:hidden text-foreground"
+            aria-label="Menü"
+            onClick={() => setMobileOpen(!mobileOpen)}
+          >
+            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
-      )}
+
+        {/* Mobil menü */}
+        {mobileOpen && (
+          <div className="lg:hidden border-t border-border bg-white">
+            <ul className="px-6 py-4 space-y-1">
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="block py-2.5 text-sm font-medium text-foreground hover:text-accent transition-colors"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+              <li className="pt-3 border-t border-border">
+                <Link
+                  href="/iletisim"
+                  className="inline-flex items-center gap-2 bg-accent text-white px-5 py-2.5 rounded text-sm font-semibold"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  Teklif Al
+                  <ChevronRight size={15} />
+                </Link>
+              </li>
+            </ul>
+          </div>
+        )}
+      </nav>
     </header>
   );
 }
