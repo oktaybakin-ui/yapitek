@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Building2, Star } from "lucide-react";
+import ScrollReveal, { StaggerChildren } from "@/components/ScrollReveal";
 
 export const metadata: Metadata = {
   title: "Referanslar",
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
 
 function PageBanner() {
   return (
-    <section className="bg-accent text-white py-20">
+    <section className="bg-accent text-white py-20 banner-animate">
       <div className="mx-auto max-w-7xl px-6 text-center">
         <h1 className="text-4xl md:text-5xl font-bold">Referanslarımız</h1>
         <p className="text-white/70 mt-4 max-w-2xl mx-auto text-lg">
@@ -47,7 +48,7 @@ function BrandPartners() {
   return (
     <section className="py-20 bg-card">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="text-center mb-14">
+        <ScrollReveal animation="fade-up" className="text-center mb-14">
           <span className="text-accent font-semibold text-sm uppercase tracking-wider">
             Çözüm Ortaklarımız
           </span>
@@ -58,13 +59,17 @@ function BrandPartners() {
             Sektörün lider markalarının yetkili bayisi olarak kaliteli
             ürünleri sizlere ulaştırıyoruz.
           </p>
-        </div>
+        </ScrollReveal>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5">
+        <StaggerChildren
+          animation="fade-up"
+          stagger={60}
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5"
+        >
           {allBrands.map((brand) => (
             <div
               key={brand.name}
-              className="bg-white rounded border border-border p-6 flex flex-col items-center justify-center gap-3 hover:shadow-md hover:border-accent/20 transition-all"
+              className="bg-white rounded border border-border p-6 flex flex-col items-center justify-center gap-3 hover-lift"
             >
               <Image
                 src={brand.logo}
@@ -76,7 +81,7 @@ function BrandPartners() {
               <span className="text-xs text-muted text-center">{brand.category}</span>
             </div>
           ))}
-        </div>
+        </StaggerChildren>
       </div>
     </section>
   );
@@ -126,7 +131,7 @@ function ProjectReferences() {
   return (
     <section className="py-20 bg-background">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="text-center mb-14">
+        <ScrollReveal animation="fade-up" className="text-center mb-14">
           <span className="text-accent font-semibold text-sm uppercase tracking-wider">
             Projelerimiz
           </span>
@@ -137,12 +142,16 @@ function ProjectReferences() {
             Türkiye genelindeki büyük ölçekli projelere malzeme tedariği
             sağladık.
           </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        </ScrollReveal>
+        <StaggerChildren
+          animation="fade-up"
+          stagger={100}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
           {projects.map((p) => (
             <div
               key={p.title}
-              className="bg-card rounded border border-border p-8 hover:shadow-lg transition-shadow"
+              className="bg-card rounded border border-border p-8 hover-lift"
             >
               <div className="flex items-center justify-between mb-4">
                 <Building2 size={24} className="text-accent" />
@@ -155,7 +164,7 @@ function ProjectReferences() {
               <div className="text-xs text-accent font-medium">{p.scope}</div>
             </div>
           ))}
-        </div>
+        </StaggerChildren>
       </div>
     </section>
   );
@@ -184,19 +193,23 @@ function Testimonials() {
   return (
     <section className="py-20 bg-accent text-white">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="text-center mb-14">
+        <ScrollReveal animation="fade-up" className="text-center mb-14">
           <span className="font-semibold text-sm uppercase tracking-wider text-white/80">
             Müşteri Yorumları
           </span>
           <h2 className="text-3xl md:text-4xl font-bold mt-2">
             Müşterilerimiz Ne Diyor?
           </h2>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        </ScrollReveal>
+        <StaggerChildren
+          animation="fade-up"
+          stagger={150}
+          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+        >
           {testimonials.map((t) => (
             <div
               key={t.name}
-              className="bg-white/10 backdrop-blur-sm rounded p-8 border border-white/10"
+              className="bg-white/10 backdrop-blur-sm rounded p-8 border border-white/10 hover-lift"
             >
               <div className="flex gap-1 mb-4">
                 {[1, 2, 3, 4, 5].map((s) => (
@@ -212,7 +225,7 @@ function Testimonials() {
               </div>
             </div>
           ))}
-        </div>
+        </StaggerChildren>
       </div>
     </section>
   );
@@ -225,24 +238,26 @@ export default function ReferanslarPage() {
       <BrandPartners />
       <ProjectReferences />
       <Testimonials />
-      <section className="py-16 bg-card">
-        <div className="mx-auto max-w-4xl px-6 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold">
-            Siz de Referanslarımız Arasına Katılın
-          </h2>
-          <p className="text-muted mt-3">
-            Projeniz için en kaliteli yapı malzemelerini tedarik etmek
-            istiyorsanız hemen iletişime geçin.
-          </p>
-          <Link
-            href="/iletisim"
-            className="inline-flex items-center gap-2 bg-accent text-white px-8 py-3.5 rounded-sm font-semibold hover:bg-accent-light transition-colors mt-6"
-          >
-            İletişime Geçin
-            <ArrowRight size={18} />
-          </Link>
-        </div>
-      </section>
+      <ScrollReveal animation="scale-in">
+        <section className="py-16 bg-card">
+          <div className="mx-auto max-w-4xl px-6 text-center">
+            <h2 className="text-2xl md:text-3xl font-bold">
+              Siz de Referanslarımız Arasına Katılın
+            </h2>
+            <p className="text-muted mt-3">
+              Projeniz için en kaliteli yapı malzemelerini tedarik etmek
+              istiyorsanız hemen iletişime geçin.
+            </p>
+            <Link
+              href="/iletisim"
+              className="btn-shine inline-flex items-center gap-2 bg-accent text-white px-8 py-3.5 rounded-sm font-semibold hover:bg-accent-light transition-colors mt-6"
+            >
+              İletişime Geçin
+              <ArrowRight size={18} />
+            </Link>
+          </div>
+        </section>
+      </ScrollReveal>
     </>
   );
 }

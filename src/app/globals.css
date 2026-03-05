@@ -40,19 +40,208 @@ html {
   scroll-behavior: smooth;
 }
 
+/* ─── Marquee ─── */
 @keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 .animate-marquee {
   animation: marquee 30s linear infinite;
 }
-
 .animate-marquee:hover {
   animation-play-state: paused;
+}
+
+/* ─── Scroll Reveal System ─── */
+.sr-base {
+  will-change: transform, opacity;
+  transition-property: transform, opacity, filter;
+  transition-duration: var(--sr-duration, 700ms);
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--sr-delay, 0ms);
+}
+
+/* Initial hidden states per animation type */
+.sr-fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+}
+.sr-fade-down {
+  opacity: 0;
+  transform: translateY(-40px);
+}
+.sr-fade-left {
+  opacity: 0;
+  transform: translateX(-50px);
+}
+.sr-fade-right {
+  opacity: 0;
+  transform: translateX(50px);
+}
+.sr-fade-in {
+  opacity: 0;
+}
+.sr-scale-in {
+  opacity: 0;
+  transform: scale(0.9);
+}
+.sr-blur-in {
+  opacity: 0;
+  filter: blur(8px);
+}
+
+/* Visible state */
+.sr-visible.sr-fade-up,
+.sr-visible.sr-fade-down,
+.sr-visible.sr-fade-left,
+.sr-visible.sr-fade-right {
+  opacity: 1;
+  transform: translate(0);
+}
+.sr-visible.sr-fade-in {
+  opacity: 1;
+}
+.sr-visible.sr-scale-in {
+  opacity: 1;
+  transform: scale(1);
+}
+.sr-visible.sr-blur-in {
+  opacity: 1;
+  filter: blur(0);
+}
+
+/* ─── Stagger Children ─── */
+.stagger-parent > * {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity var(--sr-duration, 600ms) cubic-bezier(0.16, 1, 0.3, 1),
+              transform var(--sr-duration, 600ms) cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stagger-parent.stagger-visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delays for children (up to 12 items) */
+.stagger-parent.stagger-visible > *:nth-child(1) { transition-delay: calc(var(--sr-stagger, 100ms) * 0); }
+.stagger-parent.stagger-visible > *:nth-child(2) { transition-delay: calc(var(--sr-stagger, 100ms) * 1); }
+.stagger-parent.stagger-visible > *:nth-child(3) { transition-delay: calc(var(--sr-stagger, 100ms) * 2); }
+.stagger-parent.stagger-visible > *:nth-child(4) { transition-delay: calc(var(--sr-stagger, 100ms) * 3); }
+.stagger-parent.stagger-visible > *:nth-child(5) { transition-delay: calc(var(--sr-stagger, 100ms) * 4); }
+.stagger-parent.stagger-visible > *:nth-child(6) { transition-delay: calc(var(--sr-stagger, 100ms) * 5); }
+.stagger-parent.stagger-visible > *:nth-child(7) { transition-delay: calc(var(--sr-stagger, 100ms) * 6); }
+.stagger-parent.stagger-visible > *:nth-child(8) { transition-delay: calc(var(--sr-stagger, 100ms) * 7); }
+.stagger-parent.stagger-visible > *:nth-child(9) { transition-delay: calc(var(--sr-stagger, 100ms) * 8); }
+.stagger-parent.stagger-visible > *:nth-child(10) { transition-delay: calc(var(--sr-stagger, 100ms) * 9); }
+.stagger-parent.stagger-visible > *:nth-child(11) { transition-delay: calc(var(--sr-stagger, 100ms) * 10); }
+.stagger-parent.stagger-visible > *:nth-child(12) { transition-delay: calc(var(--sr-stagger, 100ms) * 11); }
+
+/* ─── Enhanced Hover Transitions ─── */
+.hover-lift {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* ─── Image Parallax on Scroll ─── */
+.img-zoom {
+  overflow: hidden;
+}
+.img-zoom img,
+.img-zoom > div {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.img-zoom:hover img,
+.img-zoom:hover > div {
+  transform: scale(1.08);
+}
+
+/* ─── Button Hover Effects ─── */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  transition: left 0.5s ease;
+}
+.btn-shine:hover::after {
+  left: 100%;
+}
+
+/* ─── Hero Entrance Animation ─── */
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-line-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.hero-animate {
+  animation: hero-fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-animate-1 { animation-delay: 0ms; }
+.hero-animate-2 { animation-delay: 150ms; }
+.hero-animate-3 { animation-delay: 300ms; }
+.hero-animate-4 { animation-delay: 500ms; }
+.hero-animate-5 { animation-delay: 700ms; }
+
+.hero-line {
+  animation: hero-line-grow 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.9s both;
+  transform-origin: left;
+}
+
+/* ─── Page Banner Parallax ─── */
+@keyframes banner-scale {
+  from {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.banner-animate {
+  animation: banner-scale 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ─── Reduce motion for accessibility ─── */
+@media (prefers-reduced-motion: reduce) {
+  .sr-base,
+  .stagger-parent > *,
+  .hover-lift,
+  .img-zoom img,
+  .hero-animate {
+    transition: none !important;
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
 }

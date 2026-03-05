@@ -11,6 +11,7 @@ import {
   CheckCircle,
   Phone,
 } from "lucide-react";
+import ScrollReveal, { StaggerChildren } from "@/components/ScrollReveal";
 
 export const metadata: Metadata = {
   title: "Hizmetler",
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
 
 function PageBanner() {
   return (
-    <section className="bg-accent text-white py-20">
+    <section className="bg-accent text-white py-20 banner-animate">
       <div className="mx-auto max-w-7xl px-6 text-center">
         <h1 className="text-4xl md:text-5xl font-bold">Hizmetlerimiz</h1>
         <p className="text-white/70 mt-4 max-w-2xl mx-auto text-lg">
@@ -101,25 +102,36 @@ const services = [
   },
 ];
 
-function ServiceCard({ service }: { service: (typeof services)[number] }) {
+function ServiceCard({
+  service,
+  index,
+}: {
+  service: (typeof services)[number];
+  index: number;
+}) {
   return (
-    <div className="bg-card rounded border border-border p-8 md:p-10 hover:shadow-lg transition-shadow">
-      <div className="flex items-center gap-4 mb-6">
-        <div className="w-14 h-14 rounded-sm bg-accent/10 flex items-center justify-center">
-          <service.icon size={28} className="text-accent" />
+    <ScrollReveal
+      animation={index % 2 === 0 ? "fade-right" : "fade-left"}
+      delay={index * 50}
+    >
+      <div className="bg-card rounded border border-border p-8 md:p-10 hover-lift">
+        <div className="flex items-center gap-4 mb-6">
+          <div className="w-14 h-14 rounded-sm bg-accent/10 flex items-center justify-center">
+            <service.icon size={28} className="text-accent" />
+          </div>
+          <h2 className="text-xl md:text-2xl font-bold">{service.title}</h2>
         </div>
-        <h2 className="text-xl md:text-2xl font-bold">{service.title}</h2>
+        <p className="text-muted leading-relaxed">{service.desc}</p>
+        <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {service.features.map((f) => (
+            <li key={f} className="flex items-center gap-2 text-sm">
+              <CheckCircle size={16} className="text-accent shrink-0" />
+              {f}
+            </li>
+          ))}
+        </ul>
       </div>
-      <p className="text-muted leading-relaxed">{service.desc}</p>
-      <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {service.features.map((f) => (
-          <li key={f} className="flex items-center gap-2 text-sm">
-            <CheckCircle size={16} className="text-accent shrink-0" />
-            {f}
-          </li>
-        ))}
-      </ul>
-    </div>
+    </ScrollReveal>
   );
 }
 
@@ -135,25 +147,29 @@ function Process() {
   return (
     <section className="py-20 bg-accent text-white">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="text-center mb-14">
+        <ScrollReveal animation="fade-up" className="text-center mb-14">
           <span className="font-semibold text-sm uppercase tracking-wider text-white/80">
             Nasıl Çalışıyoruz?
           </span>
           <h2 className="text-3xl md:text-4xl font-bold mt-2">
             Çalışma Sürecimiz
           </h2>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        </ScrollReveal>
+        <StaggerChildren
+          animation="fade-up"
+          stagger={150}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+        >
           {steps.map((s) => (
             <div key={s.num} className="text-center">
-              <div className="text-5xl font-bold text-white/80/30 mb-4">
+              <div className="text-5xl font-bold text-white/20 mb-4">
                 {s.num}
               </div>
               <h3 className="text-lg font-semibold mb-2">{s.title}</h3>
               <p className="text-white/60 text-sm">{s.desc}</p>
             </div>
           ))}
-        </div>
+        </StaggerChildren>
       </div>
     </section>
   );
@@ -165,39 +181,41 @@ export default function HizmetlerPage() {
       <PageBanner />
       <div className="py-16 bg-background">
         <div className="mx-auto max-w-7xl px-6 space-y-8">
-          {services.map((s) => (
-            <ServiceCard key={s.title} service={s} />
+          {services.map((s, i) => (
+            <ServiceCard key={s.title} service={s} index={i} />
           ))}
         </div>
       </div>
       <Process />
       {/* CTA */}
-      <section className="py-16 bg-card">
-        <div className="mx-auto max-w-4xl px-6 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold">
-            Hizmetlerimiz Hakkında Bilgi Alın
-          </h2>
-          <p className="text-muted mt-3">
-            Projeleriniz için nasıl yardımcı olabileceğimizi konuşalım.
-          </p>
-          <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/iletisim"
-              className="inline-flex items-center gap-2 bg-accent text-white px-8 py-3.5 rounded-sm font-semibold hover:bg-accent-light transition-colors"
-            >
-              Teklif Al
-              <ArrowRight size={18} />
-            </Link>
-            <a
-              href="tel:+90312XXXXXXX"
-              className="inline-flex items-center gap-2 border-2 border-accent text-accent px-8 py-3.5 rounded-sm font-semibold hover:bg-accent hover:text-white transition-colors"
-            >
-              <Phone size={18} />
-              Hemen Arayın
-            </a>
+      <ScrollReveal animation="scale-in">
+        <section className="py-16 bg-card">
+          <div className="mx-auto max-w-4xl px-6 text-center">
+            <h2 className="text-2xl md:text-3xl font-bold">
+              Hizmetlerimiz Hakkında Bilgi Alın
+            </h2>
+            <p className="text-muted mt-3">
+              Projeleriniz için nasıl yardımcı olabileceğimizi konuşalım.
+            </p>
+            <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                href="/iletisim"
+                className="btn-shine inline-flex items-center gap-2 bg-accent text-white px-8 py-3.5 rounded-sm font-semibold hover:bg-accent-light transition-colors"
+              >
+                Teklif Al
+                <ArrowRight size={18} />
+              </Link>
+              <a
+                href="tel:+90312XXXXXXX"
+                className="inline-flex items-center gap-2 border-2 border-accent text-accent px-8 py-3.5 rounded-sm font-semibold hover:bg-accent hover:text-white transition-colors"
+              >
+                <Phone size={18} />
+                Hemen Arayın
+              </a>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </ScrollReveal>
     </>
   );
 }

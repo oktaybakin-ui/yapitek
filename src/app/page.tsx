@@ -1,4 +1,8 @@
 import BrandMarquee from "@/components/BrandMarquee";
+import ScrollReveal, {
+  StaggerChildren,
+  AnimatedCounter,
+} from "@/components/ScrollReveal";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -25,22 +29,22 @@ function Hero() {
       <div className="absolute inset-0 bg-[url('/logo.png')] bg-no-repeat bg-center bg-[length:600px] opacity-[0.03]" />
       <div className="relative mx-auto max-w-7xl px-6 py-24 md:py-32 lg:py-40">
         <div className="max-w-3xl">
-          <div className="inline-block text-xs font-semibold uppercase tracking-widest text-accent border border-accent/30 px-4 py-1.5 rounded mb-6">
+          <div className="hero-animate hero-animate-1 inline-block text-xs font-semibold uppercase tracking-widest text-accent border border-accent/30 px-4 py-1.5 rounded mb-6">
             Yapı Malzemeleri Tedarikçiniz
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white">
+          <h1 className="hero-animate hero-animate-2 text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white">
             Projeleriniz İçin
             <br />
             <span className="text-accent">Güvenilir Çözüm Ortağı</span>
           </h1>
-          <p className="mt-6 text-lg text-white/60 max-w-xl leading-relaxed">
+          <p className="hero-animate hero-animate-3 mt-6 text-lg text-white/60 max-w-xl leading-relaxed">
             Yalıtım, boya, alçı, yapı kimyasalları ve daha fazlası.
             Sektörün lider markalarının yetkili satış noktasıyız.
           </p>
-          <div className="mt-10 flex flex-col sm:flex-row gap-4">
+          <div className="hero-animate hero-animate-4 mt-10 flex flex-col sm:flex-row gap-4">
             <Link
               href="/urunler"
-              className="inline-flex items-center gap-2 bg-accent text-white px-7 py-3.5 rounded font-semibold hover:bg-accent-dark transition-colors"
+              className="btn-shine inline-flex items-center gap-2 bg-accent text-white px-7 py-3.5 rounded font-semibold hover:bg-accent-dark transition-colors"
             >
               Ürünlerimiz
               <ChevronRight size={18} />
@@ -55,18 +59,25 @@ function Hero() {
         </div>
 
         {/* Rakamlar */}
-        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-white/10 pt-10">
-          {[
-            { num: "500+", label: "Ürün Çeşidi" },
-            { num: "1000+", label: "Mutlu Müşteri" },
-            { num: "15+", label: "Yıllık Deneyim" },
-            { num: "50+", label: "Marka Ortağı" },
-          ].map((s) => (
-            <div key={s.label}>
-              <div className="text-2xl md:text-3xl font-bold text-white">{s.num}</div>
-              <div className="text-white/40 text-sm mt-1">{s.label}</div>
-            </div>
-          ))}
+        <div className="hero-animate hero-animate-5 mt-20 border-t border-white/10 pt-10">
+          <div className="hero-line h-px bg-accent/40 mb-10" />
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { num: 500, suffix: "+", label: "Ürün Çeşidi" },
+              { num: 1000, suffix: "+", label: "Mutlu Müşteri" },
+              { num: 15, suffix: "+", label: "Yıllık Deneyim" },
+              { num: 50, suffix: "+", label: "Marka Ortağı" },
+            ].map((s) => (
+              <div key={s.label}>
+                <AnimatedCounter
+                  target={s.num}
+                  suffix={s.suffix}
+                  className="text-2xl md:text-3xl font-bold text-white"
+                />
+                <div className="text-white/40 text-sm mt-1">{s.label}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -84,7 +95,11 @@ const advantages = [
 function Advantages() {
   return (
     <section className="py-14 bg-white border-b border-border">
-      <div className="mx-auto max-w-7xl px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <StaggerChildren
+        animation="fade-up"
+        stagger={120}
+        className="mx-auto max-w-7xl px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+      >
         {advantages.map((item) => (
           <div key={item.title} className="flex items-start gap-4">
             <div className="w-12 h-12 rounded bg-accent/10 flex items-center justify-center shrink-0">
@@ -96,7 +111,7 @@ function Advantages() {
             </div>
           </div>
         ))}
-      </div>
+      </StaggerChildren>
     </section>
   );
 }
@@ -115,26 +130,30 @@ function Products() {
   return (
     <section className="py-20 bg-background">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="max-w-xl mb-12">
+        <ScrollReveal animation="fade-up" className="max-w-xl mb-12">
           <h2 className="text-3xl font-bold">Ürün Kategorilerimiz</h2>
           <p className="text-muted mt-3">
             Tüm yapı malzemesi ihtiyaçlarınızı tek noktadan karşılıyoruz.
           </p>
-        </div>
+        </ScrollReveal>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <StaggerChildren
+          animation="fade-up"
+          stagger={100}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+        >
           {categories.map((cat) => (
             <Link
               href={`/urunler#${cat.id}`}
               key={cat.title}
-              className="group bg-white rounded-sm border border-border hover:border-accent/30 hover:shadow-md transition-all overflow-hidden"
+              className="group bg-white rounded-sm border border-border hover:border-accent/30 transition-all hover-lift overflow-hidden"
             >
-              <div className="relative h-48 overflow-hidden">
+              <div className="relative h-48 overflow-hidden img-zoom">
                 <Image
                   src={cat.photo}
                   alt={cat.title}
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                 <div className="absolute bottom-3 left-4">
@@ -144,13 +163,13 @@ function Products() {
               <div className="p-6">
                 <h3 className="text-lg font-semibold">{cat.title}</h3>
                 <p className="text-muted text-sm mt-2">{cat.desc}</p>
-                <span className="inline-flex items-center gap-1 text-accent text-sm font-medium mt-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="inline-flex items-center gap-1 text-accent text-sm font-medium mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   İncele <ChevronRight size={14} />
                 </span>
               </div>
             </Link>
           ))}
-        </div>
+        </StaggerChildren>
       </div>
     </section>
   );
@@ -161,7 +180,7 @@ function AboutPreview() {
   return (
     <section className="py-20 bg-white">
       <div className="mx-auto max-w-7xl px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        <div>
+        <ScrollReveal animation="fade-right">
           <h2 className="text-3xl font-bold">
             Yapı Sektöründe 15 Yılı Aşkın Tecrübe
           </h2>
@@ -190,9 +209,9 @@ function AboutPreview() {
           >
             Daha Fazla Bilgi <ArrowRight size={16} />
           </Link>
-        </div>
+        </ScrollReveal>
 
-        <div className="relative">
+        <ScrollReveal animation="fade-left" delay={200}>
           <div className="aspect-[4/3] bg-gradient-to-br from-secondary/10 to-secondary/5 rounded-sm flex items-center justify-center">
             <Image
               src="/logo.png"
@@ -202,7 +221,7 @@ function AboutPreview() {
               className="opacity-20"
             />
           </div>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );
@@ -211,23 +230,25 @@ function AboutPreview() {
 /* ───────────── HESAPLAMA CTA ───────────── */
 function CalculatorBanner() {
   return (
-    <section className="bg-accent">
-      <div className="mx-auto max-w-7xl px-6 py-14 flex flex-col md:flex-row items-center justify-between gap-6">
-        <div className="text-white">
-          <h2 className="text-2xl font-bold">Malzeme İhtiyacınızı Hesaplayın</h2>
-          <p className="text-white/60 mt-1">
-            Boya, yalıtım ve sıva için online hesaplama aracımızı kullanın.
-          </p>
+    <ScrollReveal animation="fade-in">
+      <section className="bg-accent">
+        <div className="mx-auto max-w-7xl px-6 py-14 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="text-white">
+            <h2 className="text-2xl font-bold">Malzeme İhtiyacınızı Hesaplayın</h2>
+            <p className="text-white/60 mt-1">
+              Boya, yalıtım ve sıva için online hesaplama aracımızı kullanın.
+            </p>
+          </div>
+          <Link
+            href="/hesaplama"
+            className="btn-shine inline-flex items-center gap-2 bg-white text-accent px-7 py-3.5 rounded font-semibold hover:bg-white/90 transition-colors shrink-0"
+          >
+            Hesaplama Aracı
+            <ArrowRight size={16} />
+          </Link>
         </div>
-        <Link
-          href="/hesaplama"
-          className="inline-flex items-center gap-2 bg-white text-accent px-7 py-3.5 rounded font-semibold hover:bg-white/90 transition-colors shrink-0"
-        >
-          Hesaplama Aracı
-          <ArrowRight size={16} />
-        </Link>
-      </div>
-    </section>
+      </section>
+    </ScrollReveal>
   );
 }
 
@@ -235,7 +256,7 @@ function CalculatorBanner() {
 function CTA() {
   return (
     <section className="py-20 bg-white">
-      <div className="mx-auto max-w-3xl px-6 text-center">
+      <ScrollReveal animation="scale-in" className="mx-auto max-w-3xl px-6 text-center">
         <h2 className="text-3xl font-bold">Projeniz İçin Teklif Alın</h2>
         <p className="text-muted mt-3">
           Yapı malzemesi ihtiyaçlarınız için uzman ekibimizle iletişime geçin.
@@ -243,7 +264,7 @@ function CTA() {
         <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             href="/iletisim"
-            className="inline-flex items-center gap-2 bg-accent text-white px-7 py-3.5 rounded font-semibold hover:bg-accent-dark transition-colors"
+            className="btn-shine inline-flex items-center gap-2 bg-accent text-white px-7 py-3.5 rounded font-semibold hover:bg-accent-dark transition-colors"
           >
             İletişime Geçin
             <ArrowRight size={16} />
@@ -256,7 +277,7 @@ function CTA() {
             0312 XXX XX XX
           </a>
         </div>
-      </div>
+      </ScrollReveal>
     </section>
   );
 }

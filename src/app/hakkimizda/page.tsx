@@ -5,12 +5,14 @@ import {
   Eye,
   Heart,
   Users,
-  TrendingUp,
-  Award,
   CheckCircle,
   ArrowRight,
 } from "lucide-react";
 import Link from "next/link";
+import ScrollReveal, {
+  StaggerChildren,
+  AnimatedCounter,
+} from "@/components/ScrollReveal";
 
 export const metadata: Metadata = {
   title: "Hakkımızda",
@@ -21,7 +23,7 @@ export const metadata: Metadata = {
 /* ───────────── SAYFA BANNER ───────────── */
 function PageBanner() {
   return (
-    <section className="bg-accent text-white py-20">
+    <section className="bg-accent text-white py-20 banner-animate">
       <div className="mx-auto max-w-7xl px-6 text-center">
         <h1 className="text-4xl md:text-5xl font-bold">Hakkımızda</h1>
         <p className="text-white/70 mt-4 max-w-2xl mx-auto text-lg">
@@ -38,12 +40,12 @@ function AboutContent() {
   return (
     <section className="py-20 bg-card">
       <div className="mx-auto max-w-7xl px-6 grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
-        <div className="relative">
+        <ScrollReveal animation="fade-right">
           <div className="aspect-[4/3] bg-gradient-to-br from-accent/20 to-accent/5 rounded flex items-center justify-center">
             <Building2 size={120} className="text-accent/30" />
           </div>
-        </div>
-        <div>
+        </ScrollReveal>
+        <ScrollReveal animation="fade-left" delay={150}>
           <span className="text-accent font-semibold text-sm uppercase tracking-wider">
             Biz Kimiz?
           </span>
@@ -65,24 +67,23 @@ function AboutContent() {
             vermekteyiz.
           </p>
           <div className="mt-8 grid grid-cols-2 gap-6">
-            <div className="bg-background rounded p-5">
-              <div className="text-3xl font-bold text-accent">500+</div>
-              <div className="text-muted text-sm mt-1">Ürün Çeşidi</div>
-            </div>
-            <div className="bg-background rounded p-5">
-              <div className="text-3xl font-bold text-accent">1000+</div>
-              <div className="text-muted text-sm mt-1">Mutlu Müşteri</div>
-            </div>
-            <div className="bg-background rounded p-5">
-              <div className="text-3xl font-bold text-accent">15+</div>
-              <div className="text-muted text-sm mt-1">Yıllık Deneyim</div>
-            </div>
-            <div className="bg-background rounded p-5">
-              <div className="text-3xl font-bold text-accent">50+</div>
-              <div className="text-muted text-sm mt-1">Marka Ortağı</div>
-            </div>
+            {[
+              { num: 500, suffix: "+", label: "Ürün Çeşidi" },
+              { num: 1000, suffix: "+", label: "Mutlu Müşteri" },
+              { num: 15, suffix: "+", label: "Yıllık Deneyim" },
+              { num: 50, suffix: "+", label: "Marka Ortağı" },
+            ].map((s) => (
+              <div key={s.label} className="bg-background rounded p-5">
+                <AnimatedCounter
+                  target={s.num}
+                  suffix={s.suffix}
+                  className="text-3xl font-bold text-accent"
+                />
+                <div className="text-muted text-sm mt-1">{s.label}</div>
+              </div>
+            ))}
           </div>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );
@@ -111,11 +112,15 @@ function MissionVision() {
   return (
     <section className="py-20 bg-background">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <StaggerChildren
+          animation="fade-up"
+          stagger={150}
+          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+        >
           {values.map((v) => (
             <div
               key={v.title}
-              className="bg-card rounded p-8 border border-border hover:shadow-lg transition-shadow"
+              className="bg-card rounded p-8 border border-border hover-lift"
             >
               <div className="w-14 h-14 rounded-sm bg-accent/10 flex items-center justify-center mb-5">
                 <v.icon size={28} className="text-accent" />
@@ -124,7 +129,7 @@ function MissionVision() {
               <p className="text-muted text-sm leading-relaxed">{v.desc}</p>
             </div>
           ))}
-        </div>
+        </StaggerChildren>
       </div>
     </section>
   );
@@ -146,7 +151,7 @@ function WhyUs() {
   return (
     <section className="py-20 bg-accent text-white">
       <div className="mx-auto max-w-7xl px-6 grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
-        <div>
+        <ScrollReveal animation="fade-right">
           <span className="font-semibold text-sm uppercase tracking-wider text-white/80">
             Neden YapıTek?
           </span>
@@ -158,15 +163,19 @@ function WhyUs() {
             kaliteli ürünlerimiz ve müşteri odaklı yaklaşımımız ile
             projelerinizin güvenilir çözüm ortağıyız.
           </p>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        </ScrollReveal>
+        <StaggerChildren
+          animation="fade-up"
+          stagger={80}
+          className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+        >
           {reasons.map((r) => (
             <div key={r} className="flex items-start gap-3 bg-white/10 rounded-sm p-4">
               <CheckCircle size={20} className="text-white/80 shrink-0 mt-0.5" />
               <span className="text-sm">{r}</span>
             </div>
           ))}
-        </div>
+        </StaggerChildren>
       </div>
     </section>
   );
@@ -177,12 +186,12 @@ function Founder() {
   return (
     <section className="py-20 bg-background">
       <div className="mx-auto max-w-7xl px-6 grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
-        <div className="relative">
+        <ScrollReveal animation="fade-right">
           <div className="aspect-square max-w-md mx-auto bg-gradient-to-br from-secondary/10 to-secondary/5 rounded-sm flex items-center justify-center">
             <Users size={80} className="text-secondary/20" />
           </div>
-        </div>
-        <div>
+        </ScrollReveal>
+        <ScrollReveal animation="fade-left" delay={150}>
           <span className="text-accent font-semibold text-sm uppercase tracking-wider">
             Kurucu
           </span>
@@ -199,43 +208,7 @@ function Founder() {
             koyan Mustafa Yılmaz, firmanın sürdürülebilir büyümesi ve
             sektörel gelişimi için çalışmalarına devam etmektedir.
           </p>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ───────────── EKİP ───────────── */
-const team = [
-  { name: "Mustafa Yılmaz", role: "Kurucu / Genel Müdür", icon: Users },
-];
-
-function Team() {
-  return (
-    <section className="py-20 bg-card">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="text-center mb-14">
-          <span className="text-accent font-semibold text-sm uppercase tracking-wider">
-            Ekibimiz
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold mt-2">
-            Yönetim Kadromuz
-          </h2>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-3xl mx-auto">
-          {team.map((m) => (
-            <div
-              key={m.name}
-              className="text-center bg-background rounded p-8 border border-border"
-            >
-              <div className="w-24 h-24 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
-                <m.icon size={36} className="text-accent" />
-              </div>
-              <h4 className="font-semibold text-lg">{m.name}</h4>
-              <p className="text-muted text-sm mt-1">{m.role}</p>
-            </div>
-          ))}
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );
@@ -250,24 +223,26 @@ export default function HakkimizdaPage() {
       <WhyUs />
       <Founder />
       {/* CTA */}
-      <section className="py-16 bg-background">
-        <div className="mx-auto max-w-4xl px-6 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold">
-            Bizimle Çalışmak İster Misiniz?
-          </h2>
-          <p className="text-muted mt-3">
-            Projeleriniz için en uygun yapı malzemesi çözümlerini sunmak
-            için buradayız.
-          </p>
-          <Link
-            href="/iletisim"
-            className="inline-flex items-center gap-2 bg-accent text-white px-8 py-3.5 rounded-sm font-semibold hover:bg-accent-light transition-colors mt-6"
-          >
-            İletişime Geçin
-            <ArrowRight size={18} />
-          </Link>
-        </div>
-      </section>
+      <ScrollReveal animation="scale-in">
+        <section className="py-16 bg-background">
+          <div className="mx-auto max-w-4xl px-6 text-center">
+            <h2 className="text-2xl md:text-3xl font-bold">
+              Bizimle Çalışmak İster Misiniz?
+            </h2>
+            <p className="text-muted mt-3">
+              Projeleriniz için en uygun yapı malzemesi çözümlerini sunmak
+              için buradayız.
+            </p>
+            <Link
+              href="/iletisim"
+              className="btn-shine inline-flex items-center gap-2 bg-accent text-white px-8 py-3.5 rounded-sm font-semibold hover:bg-accent-light transition-colors mt-6"
+            >
+              İletişime Geçin
+              <ArrowRight size={18} />
+            </Link>
+          </div>
+        </section>
+      </ScrollReveal>
     </>
   );
 }

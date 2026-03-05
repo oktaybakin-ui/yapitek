@@ -8,6 +8,7 @@ import {
   MessageSquare,
   Send,
 } from "lucide-react";
+import ScrollReveal, { StaggerChildren } from "@/components/ScrollReveal";
 
 export const metadata: Metadata = {
   title: "İletişim",
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
 
 function PageBanner() {
   return (
-    <section className="bg-accent text-white py-20">
+    <section className="bg-accent text-white py-20 banner-animate">
       <div className="mx-auto max-w-7xl px-6 text-center">
         <h1 className="text-4xl md:text-5xl font-bold">İletişim</h1>
         <p className="text-white/70 mt-4 max-w-2xl mx-auto text-lg">
@@ -56,11 +57,15 @@ function ContactInfo() {
   return (
     <section className="py-20 bg-card">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <StaggerChildren
+          animation="fade-up"
+          stagger={100}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+        >
           {contactInfo.map((info) => (
             <div
               key={info.title}
-              className="bg-background rounded border border-border p-6 hover:shadow-md transition-shadow"
+              className="bg-background rounded border border-border p-6 hover-lift"
             >
               <div className="w-12 h-12 bg-accent/10 rounded-sm flex items-center justify-center mb-4">
                 <info.icon size={22} className="text-accent" />
@@ -73,7 +78,7 @@ function ContactInfo() {
               ))}
             </div>
           ))}
-        </div>
+        </StaggerChildren>
       </div>
     </section>
   );
@@ -85,7 +90,7 @@ function ContactForm() {
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
           {/* Sol: açıklama */}
-          <div className="lg:col-span-2">
+          <ScrollReveal animation="fade-right" className="lg:col-span-2">
             <span className="text-accent font-semibold text-sm uppercase tracking-wider">
               İletişim Formu
             </span>
@@ -118,10 +123,10 @@ function ContactForm() {
                 </div>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Sağ: form */}
-          <div className="lg:col-span-3">
+          <ScrollReveal animation="fade-left" delay={150} className="lg:col-span-3">
             <form className="bg-card rounded border border-border p-8 space-y-5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
@@ -191,13 +196,13 @@ function ContactForm() {
               </div>
               <button
                 type="submit"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-accent text-white px-8 py-3.5 rounded-sm font-semibold hover:bg-accent-light transition-colors"
+                className="btn-shine w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-accent text-white px-8 py-3.5 rounded-sm font-semibold hover:bg-accent-light transition-colors"
               >
                 Mesaj Gönder
                 <ArrowRight size={18} />
               </button>
             </form>
-          </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>
@@ -207,26 +212,28 @@ function ContactForm() {
 /* ───────────── HARİTA ───────────── */
 function Map() {
   return (
-    <section className="bg-foreground">
-      <div className="mx-auto max-w-7xl px-6 py-10">
-        <div className="rounded border border-white/10 overflow-hidden h-96">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3060.1!2d32.8083!3d39.9142!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d34f00a37f9b5b%3A0x0!2zU8O2xJ_DvHTDtnrDvCBNYWguIFPDtsSfw7x0w7Z6w7wgQ2QuIE5vOjIvQS0xMywgw4dhbmtheWEvQW5rYXJh!5e0!3m2!1str!2str!4v1"
-            width="100%"
-            height="100%"
-            style={{ border: 0, filter: "grayscale(100%) contrast(1.1) invert(92%) hue-rotate(180deg)" }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            title="YapıTek Konum"
-          />
+    <ScrollReveal animation="fade-in">
+      <section className="bg-foreground">
+        <div className="mx-auto max-w-7xl px-6 py-10">
+          <div className="rounded border border-white/10 overflow-hidden h-96">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3060.1!2d32.8083!3d39.9142!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d34f00a37f9b5b%3A0x0!2zU8O2xJ_DvHTDtnrDvCBNYWguIFPDtsSfw7x0w7Z6w7wgQ2QuIE5vOjIvQS0xMywgw4dhbmtheWEvQW5rYXJh!5e0!3m2!1str!2str!4v1"
+              width="100%"
+              height="100%"
+              style={{ border: 0, filter: "grayscale(100%) contrast(1.1) invert(92%) hue-rotate(180deg)" }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="YapıTek Konum"
+            />
+          </div>
+          <div className="flex items-center gap-3 mt-4 text-white/50 text-sm">
+            <MapPin size={16} className="text-accent" />
+            Söğütözü Mah. Söğütözü Cd. No:2/A-13, Koç Kuleleri, Çankaya/Ankara 06510
+          </div>
         </div>
-        <div className="flex items-center gap-3 mt-4 text-white/50 text-sm">
-          <MapPin size={16} className="text-accent" />
-          Söğütözü Mah. Söğütözü Cd. No:2/A-13, Koç Kuleleri, Çankaya/Ankara 06510
-        </div>
-      </div>
-    </section>
+      </section>
+    </ScrollReveal>
   );
 }
 
