@@ -91,22 +91,22 @@ body[data-sr-ready] .sr-blur-in {
   filter: blur(8px);
 }
 
-/* Visible state */
-.sr-visible.sr-fade-up,
-.sr-visible.sr-fade-down,
-.sr-visible.sr-fade-left,
-.sr-visible.sr-fade-right {
+/* Visible state — must match or exceed hiding specificity */
+body[data-sr-ready] .sr-visible.sr-fade-up,
+body[data-sr-ready] .sr-visible.sr-fade-down,
+body[data-sr-ready] .sr-visible.sr-fade-left,
+body[data-sr-ready] .sr-visible.sr-fade-right {
   opacity: 1;
   transform: translate(0);
 }
-.sr-visible.sr-fade-in {
+body[data-sr-ready] .sr-visible.sr-fade-in {
   opacity: 1;
 }
-.sr-visible.sr-scale-in {
+body[data-sr-ready] .sr-visible.sr-scale-in {
   opacity: 1;
   transform: scale(1);
 }
-.sr-visible.sr-blur-in {
+body[data-sr-ready] .sr-visible.sr-blur-in {
   opacity: 1;
   filter: blur(0);
 }
@@ -119,24 +119,28 @@ body[data-sr-ready] .stagger-parent > * {
               transform var(--sr-duration, 600ms) cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.stagger-parent.stagger-visible > * {
+body[data-sr-ready] .stagger-parent.stagger-visible > * {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Stagger delays for children (up to 12 items) */
-.stagger-parent.stagger-visible > *:nth-child(1) { transition-delay: calc(var(--sr-stagger, 100ms) * 0); }
-.stagger-parent.stagger-visible > *:nth-child(2) { transition-delay: calc(var(--sr-stagger, 100ms) * 1); }
-.stagger-parent.stagger-visible > *:nth-child(3) { transition-delay: calc(var(--sr-stagger, 100ms) * 2); }
-.stagger-parent.stagger-visible > *:nth-child(4) { transition-delay: calc(var(--sr-stagger, 100ms) * 3); }
-.stagger-parent.stagger-visible > *:nth-child(5) { transition-delay: calc(var(--sr-stagger, 100ms) * 4); }
-.stagger-parent.stagger-visible > *:nth-child(6) { transition-delay: calc(var(--sr-stagger, 100ms) * 5); }
-.stagger-parent.stagger-visible > *:nth-child(7) { transition-delay: calc(var(--sr-stagger, 100ms) * 6); }
-.stagger-parent.stagger-visible > *:nth-child(8) { transition-delay: calc(var(--sr-stagger, 100ms) * 7); }
-.stagger-parent.stagger-visible > *:nth-child(9) { transition-delay: calc(var(--sr-stagger, 100ms) * 8); }
-.stagger-parent.stagger-visible > *:nth-child(10) { transition-delay: calc(var(--sr-stagger, 100ms) * 9); }
-.stagger-parent.stagger-visible > *:nth-child(11) { transition-delay: calc(var(--sr-stagger, 100ms) * 10); }
-.stagger-parent.stagger-visible > *:nth-child(12) { transition-delay: calc(var(--sr-stagger, 100ms) * 11); }
+/* Stagger delays for children (up to 16 items) */
+body[data-sr-ready] .stagger-parent.stagger-visible > *:nth-child(1) { transition-delay: calc(var(--sr-stagger, 100ms) * 0); }
+body[data-sr-ready] .stagger-parent.stagger-visible > *:nth-child(2) { transition-delay: calc(var(--sr-stagger, 100ms) * 1); }
+body[data-sr-ready] .stagger-parent.stagger-visible > *:nth-child(3) { transition-delay: calc(var(--sr-stagger, 100ms) * 2); }
+body[data-sr-ready] .stagger-parent.stagger-visible > *:nth-child(4) { transition-delay: calc(var(--sr-stagger, 100ms) * 3); }
+body[data-sr-ready] .stagger-parent.stagger-visible > *:nth-child(5) { transition-delay: calc(var(--sr-stagger, 100ms) * 4); }
+body[data-sr-ready] .stagger-parent.stagger-visible > *:nth-child(6) { transition-delay: calc(var(--sr-stagger, 100ms) * 5); }
+body[data-sr-ready] .stagger-parent.stagger-visible > *:nth-child(7) { transition-delay: calc(var(--sr-stagger, 100ms) * 6); }
+body[data-sr-ready] .stagger-parent.stagger-visible > *:nth-child(8) { transition-delay: calc(var(--sr-stagger, 100ms) * 7); }
+body[data-sr-ready] .stagger-parent.stagger-visible > *:nth-child(9) { transition-delay: calc(var(--sr-stagger, 100ms) * 8); }
+body[data-sr-ready] .stagger-parent.stagger-visible > *:nth-child(10) { transition-delay: calc(var(--sr-stagger, 100ms) * 9); }
+body[data-sr-ready] .stagger-parent.stagger-visible > *:nth-child(11) { transition-delay: calc(var(--sr-stagger, 100ms) * 10); }
+body[data-sr-ready] .stagger-parent.stagger-visible > *:nth-child(12) { transition-delay: calc(var(--sr-stagger, 100ms) * 11); }
+body[data-sr-ready] .stagger-parent.stagger-visible > *:nth-child(13) { transition-delay: calc(var(--sr-stagger, 100ms) * 12); }
+body[data-sr-ready] .stagger-parent.stagger-visible > *:nth-child(14) { transition-delay: calc(var(--sr-stagger, 100ms) * 13); }
+body[data-sr-ready] .stagger-parent.stagger-visible > *:nth-child(15) { transition-delay: calc(var(--sr-stagger, 100ms) * 14); }
+body[data-sr-ready] .stagger-parent.stagger-visible > *:nth-child(16) { transition-delay: calc(var(--sr-stagger, 100ms) * 15); }
 
 /* ─── Enhanced Hover Transitions ─── */
 .hover-lift {
