@@ -103,9 +103,9 @@ const services = [
 
 function ServiceCard({ service }: { service: (typeof services)[number] }) {
   return (
-    <div className="bg-card rounded-2xl border border-border p-8 md:p-10 hover:shadow-lg transition-shadow">
+    <div className="bg-card rounded border border-border p-8 md:p-10 hover:shadow-lg transition-shadow">
       <div className="flex items-center gap-4 mb-6">
-        <div className="w-14 h-14 rounded-lg bg-accent/10 flex items-center justify-center">
+        <div className="w-14 h-14 rounded-sm bg-accent/10 flex items-center justify-center">
           <service.icon size={28} className="text-accent" />
         </div>
         <h2 className="text-xl md:text-2xl font-bold">{service.title}</h2>
@@ -183,14 +183,14 @@ export default function HizmetlerPage() {
           <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/iletisim"
-              className="inline-flex items-center gap-2 bg-accent text-white px-8 py-3.5 rounded-lg font-semibold hover:bg-accent-light transition-colors"
+              className="inline-flex items-center gap-2 bg-accent text-white px-8 py-3.5 rounded-sm font-semibold hover:bg-accent-light transition-colors"
             >
               Teklif Al
               <ArrowRight size={18} />
             </Link>
             <a
-              href="tel:+902121234567"
-              className="inline-flex items-center gap-2 border-2 border-accent text-accent px-8 py-3.5 rounded-lg font-semibold hover:bg-accent hover:text-white transition-colors"
+              href="tel:+90312XXXXXXX"
+              className="inline-flex items-center gap-2 border-2 border-accent text-accent px-8 py-3.5 rounded-sm font-semibold hover:bg-accent hover:text-white transition-colors"
             >
               <Phone size={18} />
               Hemen Arayın

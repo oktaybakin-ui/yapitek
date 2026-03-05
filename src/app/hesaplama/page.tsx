@@ -80,15 +80,15 @@ function BoyaCalc() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-sm font-medium mb-1.5">Oda Genişliği (m)</label>
-          <input type="number" value={width} onChange={(e) => setWidth(e.target.value)} placeholder="Örn: 5" className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:border-accent" />
+          <input type="number" value={width} onChange={(e) => setWidth(e.target.value)} placeholder="Örn: 5" className="w-full px-4 py-3 rounded-sm border border-border bg-background focus:outline-none focus:border-accent" />
         </div>
         <div>
           <label className="block text-sm font-medium mb-1.5">Oda Yüksekliği (m)</label>
-          <input type="number" value={height} onChange={(e) => setHeight(e.target.value)} placeholder="Örn: 2.8" className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:border-accent" />
+          <input type="number" value={height} onChange={(e) => setHeight(e.target.value)} placeholder="Örn: 2.8" className="w-full px-4 py-3 rounded-sm border border-border bg-background focus:outline-none focus:border-accent" />
         </div>
         <div>
           <label className="block text-sm font-medium mb-1.5">Kat Sayısı (Boya)</label>
-          <select value={coats} onChange={(e) => setCoats(e.target.value)} className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:border-accent">
+          <select value={coats} onChange={(e) => setCoats(e.target.value)} className="w-full px-4 py-3 rounded-sm border border-border bg-background focus:outline-none focus:border-accent">
             <option value="1">1 Kat</option>
             <option value="2">2 Kat</option>
             <option value="3">3 Kat</option>
@@ -96,14 +96,14 @@ function BoyaCalc() {
         </div>
         <div>
           <label className="block text-sm font-medium mb-1.5">Kapı Sayısı</label>
-          <input type="number" value={doorCount} onChange={(e) => setDoorCount(e.target.value)} placeholder="1" className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:border-accent" />
+          <input type="number" value={doorCount} onChange={(e) => setDoorCount(e.target.value)} placeholder="1" className="w-full px-4 py-3 rounded-sm border border-border bg-background focus:outline-none focus:border-accent" />
         </div>
         <div>
           <label className="block text-sm font-medium mb-1.5">Pencere Sayısı</label>
-          <input type="number" value={windowCount} onChange={(e) => setWindowCount(e.target.value)} placeholder="2" className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:border-accent" />
+          <input type="number" value={windowCount} onChange={(e) => setWindowCount(e.target.value)} placeholder="2" className="w-full px-4 py-3 rounded-sm border border-border bg-background focus:outline-none focus:border-accent" />
         </div>
       </div>
-      <button onClick={calculate} className="inline-flex items-center gap-2 bg-accent text-white px-6 py-3 rounded-lg font-semibold hover:bg-accent-light transition-colors">
+      <button onClick={calculate} className="inline-flex items-center gap-2 bg-accent text-white px-6 py-3 rounded-sm font-semibold hover:bg-accent-light transition-colors">
         <Calculator size={18} /> Hesapla
       </button>
       {results && <ResultsDisplay results={results} />}
@@ -149,11 +149,11 @@ function YalitimCalc() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-sm font-medium mb-1.5">Yalıtım Alanı (m²)</label>
-          <input type="number" value={area} onChange={(e) => setArea(e.target.value)} placeholder="Örn: 120" className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:border-accent" />
+          <input type="number" value={area} onChange={(e) => setArea(e.target.value)} placeholder="Örn: 120" className="w-full px-4 py-3 rounded-sm border border-border bg-background focus:outline-none focus:border-accent" />
         </div>
         <div>
           <label className="block text-sm font-medium mb-1.5">Kalınlık (cm)</label>
-          <select value={thickness} onChange={(e) => setThickness(e.target.value)} className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:border-accent">
+          <select value={thickness} onChange={(e) => setThickness(e.target.value)} className="w-full px-4 py-3 rounded-sm border border-border bg-background focus:outline-none focus:border-accent">
             <option value="3">3 cm</option>
             <option value="5">5 cm</option>
             <option value="8">8 cm</option>
@@ -163,7 +163,7 @@ function YalitimCalc() {
         </div>
         <div className="sm:col-span-2">
           <label className="block text-sm font-medium mb-1.5">Malzeme Türü</label>
-          <select value={material} onChange={(e) => setMaterial(e.target.value)} className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:border-accent">
+          <select value={material} onChange={(e) => setMaterial(e.target.value)} className="w-full px-4 py-3 rounded-sm border border-border bg-background focus:outline-none focus:border-accent">
             <option value="eps">EPS (Strafor)</option>
             <option value="xps">XPS</option>
             <option value="tasYunu">Taş Yünü</option>
@@ -171,7 +171,7 @@ function YalitimCalc() {
           </select>
         </div>
       </div>
-      <button onClick={calculate} className="inline-flex items-center gap-2 bg-accent text-white px-6 py-3 rounded-lg font-semibold hover:bg-accent-light transition-colors">
+      <button onClick={calculate} className="inline-flex items-center gap-2 bg-accent text-white px-6 py-3 rounded-sm font-semibold hover:bg-accent-light transition-colors">
         <Calculator size={18} /> Hesapla
       </button>
       {results && <ResultsDisplay results={results} />}
@@ -214,11 +214,11 @@ function SivaCalc() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-sm font-medium mb-1.5">Sıva Alanı (m²)</label>
-          <input type="number" value={area} onChange={(e) => setArea(e.target.value)} placeholder="Örn: 80" className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:border-accent" />
+          <input type="number" value={area} onChange={(e) => setArea(e.target.value)} placeholder="Örn: 80" className="w-full px-4 py-3 rounded-sm border border-border bg-background focus:outline-none focus:border-accent" />
         </div>
         <div>
           <label className="block text-sm font-medium mb-1.5">Kalınlık (mm)</label>
-          <select value={thickness} onChange={(e) => setThickness(e.target.value)} className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:border-accent">
+          <select value={thickness} onChange={(e) => setThickness(e.target.value)} className="w-full px-4 py-3 rounded-sm border border-border bg-background focus:outline-none focus:border-accent">
             <option value="10">10 mm</option>
             <option value="15">15 mm</option>
             <option value="20">20 mm</option>
@@ -228,7 +228,7 @@ function SivaCalc() {
         </div>
         <div className="sm:col-span-2">
           <label className="block text-sm font-medium mb-1.5">Sıva Türü</label>
-          <select value={sivaType} onChange={(e) => setSivaType(e.target.value)} className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:border-accent">
+          <select value={sivaType} onChange={(e) => setSivaType(e.target.value)} className="w-full px-4 py-3 rounded-sm border border-border bg-background focus:outline-none focus:border-accent">
             <option value="makine">Makine Sıvası</option>
             <option value="alci">Alçı Sıva</option>
             <option value="hazir">Hazır Sıva</option>
@@ -236,7 +236,7 @@ function SivaCalc() {
           </select>
         </div>
       </div>
-      <button onClick={calculate} className="inline-flex items-center gap-2 bg-accent text-white px-6 py-3 rounded-lg font-semibold hover:bg-accent-light transition-colors">
+      <button onClick={calculate} className="inline-flex items-center gap-2 bg-accent text-white px-6 py-3 rounded-sm font-semibold hover:bg-accent-light transition-colors">
         <Calculator size={18} /> Hesapla
       </button>
       {results && <ResultsDisplay results={results} />}
@@ -286,17 +286,17 @@ function SuYalitimCalc() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-sm font-medium mb-1.5">Yalıtım Alanı (m²)</label>
-          <input type="number" value={area} onChange={(e) => setArea(e.target.value)} placeholder="Örn: 50" className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:border-accent" />
+          <input type="number" value={area} onChange={(e) => setArea(e.target.value)} placeholder="Örn: 50" className="w-full px-4 py-3 rounded-sm border border-border bg-background focus:outline-none focus:border-accent" />
         </div>
         <div>
           <label className="block text-sm font-medium mb-1.5">Yalıtım Yöntemi</label>
-          <select value={method} onChange={(e) => setMethod(e.target.value)} className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:border-accent">
+          <select value={method} onChange={(e) => setMethod(e.target.value)} className="w-full px-4 py-3 rounded-sm border border-border bg-background focus:outline-none focus:border-accent">
             <option value="membran">Membran (Rulo)</option>
             <option value="likit">Likit Membran</option>
           </select>
         </div>
       </div>
-      <button onClick={calculate} className="inline-flex items-center gap-2 bg-accent text-white px-6 py-3 rounded-lg font-semibold hover:bg-accent-light transition-colors">
+      <button onClick={calculate} className="inline-flex items-center gap-2 bg-accent text-white px-6 py-3 rounded-sm font-semibold hover:bg-accent-light transition-colors">
         <Calculator size={18} /> Hesapla
       </button>
       {results && <ResultsDisplay results={results} />}
@@ -307,11 +307,11 @@ function SuYalitimCalc() {
 /* ───────────── SONUÇ GÖSTER ───────────── */
 function ResultsDisplay({ results }: { results: CalcResult[] }) {
   return (
-    <div className="bg-accent/5 border border-accent/20 rounded-xl p-6 mt-4">
+    <div className="bg-accent/5 border border-accent/20 rounded p-6 mt-4">
       <h4 className="font-semibold text-lg mb-4 text-accent">Hesaplama Sonucu</h4>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {results.map((r) => (
-          <div key={r.label} className="bg-card rounded-lg p-4 border border-border">
+          <div key={r.label} className="bg-card rounded-sm p-4 border border-border">
             <div className="text-muted text-xs mb-1">{r.label}</div>
             <div className="text-xl font-bold">
               {r.value} <span className="text-sm font-normal text-muted">{r.unit}</span>
@@ -324,7 +324,7 @@ function ResultsDisplay({ results }: { results: CalcResult[] }) {
       </p>
       <Link
         href="/iletisim"
-        className="inline-flex items-center gap-2 bg-accent text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-accent-light transition-colors mt-4"
+        className="inline-flex items-center gap-2 bg-accent text-white px-5 py-2.5 rounded-sm text-sm font-semibold hover:bg-accent-light transition-colors mt-4"
       >
         Teklif İste <ArrowRight size={16} />
       </Link>
@@ -347,7 +347,7 @@ export default function HesaplamaPage() {
               <button
                 key={ct.id}
                 onClick={() => setActiveCalc(ct.id)}
-                className={`flex flex-col items-center gap-2 p-4 rounded-xl border transition-all ${
+                className={`flex flex-col items-center gap-2 p-4 rounded border transition-all ${
                   activeCalc === ct.id
                     ? "bg-accent text-white border-accent"
                     : "bg-card border-border hover:border-accent/30"
@@ -360,7 +360,7 @@ export default function HesaplamaPage() {
           </div>
 
           {/* Hesaplama formu */}
-          <div className="bg-card rounded-2xl border border-border p-8 md:p-10">
+          <div className="bg-card rounded border border-border p-8 md:p-10">
             <h2 className="text-2xl font-bold mb-6">
               {calcTypes.find((c) => c.id === activeCalc)?.label}
             </h2>
@@ -372,7 +372,7 @@ export default function HesaplamaPage() {
           </div>
 
           {/* Bilgilendirme */}
-          <div className="mt-10 bg-card rounded-2xl border border-border p-8">
+          <div className="mt-10 bg-card rounded border border-border p-8">
             <h3 className="text-lg font-semibold mb-4">Hesaplama Hakkında</h3>
             <div className="text-muted text-sm space-y-2">
               <p>

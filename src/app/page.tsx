@@ -127,7 +127,7 @@ function Products() {
             <Link
               href={`/urunler#${cat.id}`}
               key={cat.title}
-              className="group bg-white rounded-lg p-7 border border-border hover:border-accent/30 hover:shadow-md transition-all"
+              className="group bg-white rounded-sm p-7 border border-border hover:border-accent/30 hover:shadow-md transition-all"
             >
               <cat.icon size={28} className="text-secondary group-hover:text-accent transition-colors" />
               <h3 className="text-lg font-semibold mt-4">{cat.title}</h3>
@@ -180,7 +180,7 @@ function AboutPreview() {
         </div>
 
         <div className="relative">
-          <div className="aspect-[4/3] bg-gradient-to-br from-secondary/10 to-secondary/5 rounded-lg flex items-center justify-center">
+          <div className="aspect-[4/3] bg-gradient-to-br from-secondary/10 to-secondary/5 rounded-sm flex items-center justify-center">
             <Image
               src="/logo.png"
               alt="YapıTek"
@@ -236,11 +236,11 @@ function CTA() {
             <ArrowRight size={16} />
           </Link>
           <a
-            href="tel:+902121234567"
+            href="tel:+90312XXXXXXX"
             className="inline-flex items-center gap-2 border border-foreground/20 text-foreground px-7 py-3.5 rounded font-semibold hover:bg-foreground hover:text-white transition-colors"
           >
             <Phone size={16} />
-            0212 123 45 67
+            0312 XXX XX XX
           </a>
         </div>
       </div>

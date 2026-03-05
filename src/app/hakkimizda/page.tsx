@@ -39,7 +39,7 @@ function AboutContent() {
     <section className="py-20 bg-card">
       <div className="mx-auto max-w-7xl px-6 grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
         <div className="relative">
-          <div className="aspect-[4/3] bg-gradient-to-br from-accent/20 to-accent/5 rounded-2xl flex items-center justify-center">
+          <div className="aspect-[4/3] bg-gradient-to-br from-accent/20 to-accent/5 rounded flex items-center justify-center">
             <Building2 size={120} className="text-accent/30" />
           </div>
         </div>
@@ -65,19 +65,19 @@ function AboutContent() {
             vermekteyiz.
           </p>
           <div className="mt-8 grid grid-cols-2 gap-6">
-            <div className="bg-background rounded-xl p-5">
+            <div className="bg-background rounded p-5">
               <div className="text-3xl font-bold text-accent">500+</div>
               <div className="text-muted text-sm mt-1">Ürün Çeşidi</div>
             </div>
-            <div className="bg-background rounded-xl p-5">
+            <div className="bg-background rounded p-5">
               <div className="text-3xl font-bold text-accent">1000+</div>
               <div className="text-muted text-sm mt-1">Mutlu Müşteri</div>
             </div>
-            <div className="bg-background rounded-xl p-5">
+            <div className="bg-background rounded p-5">
               <div className="text-3xl font-bold text-accent">15+</div>
               <div className="text-muted text-sm mt-1">Yıllık Deneyim</div>
             </div>
-            <div className="bg-background rounded-xl p-5">
+            <div className="bg-background rounded p-5">
               <div className="text-3xl font-bold text-accent">50+</div>
               <div className="text-muted text-sm mt-1">Marka Ortağı</div>
             </div>
@@ -115,9 +115,9 @@ function MissionVision() {
           {values.map((v) => (
             <div
               key={v.title}
-              className="bg-card rounded-xl p-8 border border-border hover:shadow-lg transition-shadow"
+              className="bg-card rounded p-8 border border-border hover:shadow-lg transition-shadow"
             >
-              <div className="w-14 h-14 rounded-lg bg-accent/10 flex items-center justify-center mb-5">
+              <div className="w-14 h-14 rounded-sm bg-accent/10 flex items-center justify-center mb-5">
                 <v.icon size={28} className="text-accent" />
               </div>
               <h3 className="text-xl font-semibold mb-3">{v.title}</h3>
@@ -161,7 +161,7 @@ function WhyUs() {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {reasons.map((r) => (
-            <div key={r} className="flex items-start gap-3 bg-white/10 rounded-lg p-4">
+            <div key={r} className="flex items-start gap-3 bg-white/10 rounded-sm p-4">
               <CheckCircle size={20} className="text-white/80 shrink-0 mt-0.5" />
               <span className="text-sm">{r}</span>
             </div>
@@ -178,7 +178,7 @@ function Founder() {
     <section className="py-20 bg-background">
       <div className="mx-auto max-w-7xl px-6 grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
         <div className="relative">
-          <div className="aspect-square max-w-md mx-auto bg-gradient-to-br from-secondary/10 to-secondary/5 rounded-lg flex items-center justify-center">
+          <div className="aspect-square max-w-md mx-auto bg-gradient-to-br from-secondary/10 to-secondary/5 rounded-sm flex items-center justify-center">
             <Users size={80} className="text-secondary/20" />
           </div>
         </div>
@@ -226,7 +226,7 @@ function Team() {
           {team.map((m) => (
             <div
               key={m.name}
-              className="text-center bg-background rounded-xl p-8 border border-border"
+              className="text-center bg-background rounded p-8 border border-border"
             >
               <div className="w-24 h-24 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
                 <m.icon size={36} className="text-accent" />
@@ -261,7 +261,7 @@ export default function HakkimizdaPage() {
           </p>
           <Link
             href="/iletisim"
-            className="inline-flex items-center gap-2 bg-accent text-white px-8 py-3.5 rounded-lg font-semibold hover:bg-accent-light transition-colors mt-6"
+            className="inline-flex items-center gap-2 bg-accent text-white px-8 py-3.5 rounded-sm font-semibold hover:bg-accent-light transition-colors mt-6"
           >
             İletişime Geçin
             <ArrowRight size={18} />

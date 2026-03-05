@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Building2, Star } from "lucide-react";
 
@@ -23,23 +24,19 @@ function PageBanner() {
 }
 
 /* ───────────── MARKA ORTAKLARI ───────────── */
-const brandCategories = [
-  {
-    category: "Yalıtım",
-    brands: ["İzocam", "Knauf Insulation", "Rockwool", "Dow", "BASF", "Hekim Yapı"],
-  },
-  {
-    category: "Boya",
-    brands: ["Filli Boya", "DYO", "Marshall", "Polisan", "Betek", "Jotun"],
-  },
-  {
-    category: "Yapı Kimyasalları",
-    brands: ["Weber Saint-Gobain", "Kalekim", "MYK Yapı Kimyasalları", "Sika", "Mapei", "Bostik"],
-  },
-  {
-    category: "Alçı & Levha",
-    brands: ["Knauf", "Rigips", "Ytong", "Dalsan", "Norgips", "Lafarge"],
-  },
+const allBrands = [
+  { name: "İzocam", logo: "/brands/izocam.svg", category: "Yalıtım" },
+  { name: "Knauf", logo: "/brands/knauf.png", category: "Yalıtım / Alçı" },
+  { name: "Hekim Yapı", logo: "/brands/hekim-yapi.png", category: "Yalıtım" },
+  { name: "Filli Boya", logo: "/brands/filli-boya.png", category: "Boya" },
+  { name: "DYO", logo: "/brands/dyo.png", category: "Boya" },
+  { name: "Marshall", logo: "/brands/marshall.png", category: "Boya" },
+  { name: "Polisan", logo: "/brands/polisan.png", category: "Boya" },
+  { name: "Betek", logo: "/brands/betek.png", category: "Boya" },
+  { name: "Weber", logo: "/brands/weber.svg", category: "Yapı Kimyasalları" },
+  { name: "Kalekim", logo: "/brands/kalekim.svg", category: "Yapı Kimyasalları" },
+  { name: "Ytong", logo: "/brands/ytong.png", category: "Yapı Levha" },
+  { name: "Rigips", logo: "/brands/rigips.png", category: "Alçı / Levha" },
 ];
 
 function BrandPartners() {
@@ -59,22 +56,20 @@ function BrandPartners() {
           </p>
         </div>
 
-        <div className="space-y-10">
-          {brandCategories.map((bc) => (
-            <div key={bc.category}>
-              <h3 className="text-lg font-semibold mb-4 text-accent">
-                {bc.category}
-              </h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
-                {bc.brands.map((brand) => (
-                  <div
-                    key={brand}
-                    className="bg-background rounded-xl border border-border h-20 flex items-center justify-center font-medium text-sm text-muted hover:text-accent hover:border-accent/30 hover:shadow-md transition-all cursor-pointer text-center px-2"
-                  >
-                    {brand}
-                  </div>
-                ))}
-              </div>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5">
+          {allBrands.map((brand) => (
+            <div
+              key={brand.name}
+              className="bg-white rounded border border-border p-6 flex flex-col items-center justify-center gap-3 hover:shadow-md hover:border-accent/20 transition-all"
+            >
+              <Image
+                src={brand.logo}
+                alt={brand.name}
+                width={120}
+                height={60}
+                className="h-12 w-auto object-contain"
+              />
+              <span className="text-xs text-muted text-center">{brand.category}</span>
             </div>
           ))}
         </div>
@@ -143,7 +138,7 @@ function ProjectReferences() {
           {projects.map((p) => (
             <div
               key={p.title}
-              className="bg-card rounded-xl border border-border p-8 hover:shadow-lg transition-shadow"
+              className="bg-card rounded border border-border p-8 hover:shadow-lg transition-shadow"
             >
               <div className="flex items-center justify-between mb-4">
                 <Building2 size={24} className="text-accent" />
@@ -197,7 +192,7 @@ function Testimonials() {
           {testimonials.map((t) => (
             <div
               key={t.name}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/10"
+              className="bg-white/10 backdrop-blur-sm rounded p-8 border border-white/10"
             >
               <div className="flex gap-1 mb-4">
                 {[1, 2, 3, 4, 5].map((s) => (
@@ -237,7 +232,7 @@ export default function ReferanslarPage() {
           </p>
           <Link
             href="/iletisim"
-            className="inline-flex items-center gap-2 bg-accent text-white px-8 py-3.5 rounded-lg font-semibold hover:bg-accent-light transition-colors mt-6"
+            className="inline-flex items-center gap-2 bg-accent text-white px-8 py-3.5 rounded-sm font-semibold hover:bg-accent-light transition-colors mt-6"
           >
             İletişime Geçin
             <ArrowRight size={18} />

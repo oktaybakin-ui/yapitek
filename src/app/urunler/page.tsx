@@ -137,10 +137,10 @@ function CategorySection({
 }) {
   return (
     <section id={cat.id} className="scroll-mt-24">
-      <div className="bg-card rounded-2xl border border-border overflow-hidden hover:shadow-lg transition-shadow">
+      <div className="bg-card rounded border border-border overflow-hidden hover:shadow-lg transition-shadow">
         <div className="p-8 md:p-10">
           <div className="flex items-center gap-4 mb-6">
-            <div className="w-14 h-14 rounded-lg bg-accent/10 flex items-center justify-center">
+            <div className="w-14 h-14 rounded-sm bg-accent/10 flex items-center justify-center">
               <cat.icon size={28} className="text-accent" />
             </div>
             <div>
@@ -153,7 +153,7 @@ function CategorySection({
             {cat.products.map((p) => (
               <div
                 key={p}
-                className="flex items-center gap-2 bg-background rounded-lg px-4 py-3 text-sm hover:bg-accent/5 transition-colors"
+                className="flex items-center gap-2 bg-background rounded-sm px-4 py-3 text-sm hover:bg-accent/5 transition-colors"
               >
                 <ChevronRight size={14} className="text-accent shrink-0" />
                 {p}
@@ -164,7 +164,7 @@ function CategorySection({
           <div className="mt-6 flex items-center gap-4">
             <Link
               href="/iletisim"
-              className="inline-flex items-center gap-2 bg-accent text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-accent-light transition-colors"
+              className="inline-flex items-center gap-2 bg-accent text-white px-5 py-2.5 rounded-sm text-sm font-semibold hover:bg-accent-light transition-colors"
             >
               Fiyat Teklifi Al
             </Link>
@@ -207,7 +207,7 @@ export default function UrunlerPage() {
           ))}
 
           {/* CTA */}
-          <div className="bg-accent rounded-2xl p-10 text-white text-center">
+          <div className="bg-accent rounded p-10 text-white text-center">
             <h3 className="text-2xl font-bold">
               Aradığınız Ürünü Bulamadınız mı?
             </h3>
@@ -216,11 +216,11 @@ export default function UrunlerPage() {
               İhtiyacınız olan malzemeyi temin edebiliriz.
             </p>
             <a
-              href="tel:+902121234567"
-              className="inline-flex items-center gap-2 bg-[#EAECE3] text-accent px-8 py-3.5 rounded-lg font-semibold hover:bg-white transition-colors mt-6"
+              href="tel:+90312XXXXXXX"
+              className="inline-flex items-center gap-2 bg-white text-accent px-8 py-3.5 rounded-sm font-semibold hover:bg-white transition-colors mt-6"
             >
               <Phone size={18} />
-              0212 123 45 67
+              0312 XXX XX XX
             </a>
           </div>
         </div>
