@@ -1,4 +1,5 @@
 import BrandMarquee from "@/components/BrandMarquee";
+import CategoryCarousel from "@/components/CategoryCarousel";
 import ScrollReveal, {
   StaggerChildren,
   AnimatedCounter,
@@ -11,12 +12,6 @@ import {
   Truck,
   Award,
   Headphones,
-  Droplets,
-  Paintbrush,
-  Layers,
-  FlaskConical,
-  Hammer,
-  Building2,
   ArrowRight,
   Phone,
   CheckCircle,
@@ -118,12 +113,12 @@ function Advantages() {
 
 /* ───────────── ÜRÜN KATEGORİLERİ ───────────── */
 const categories = [
-  { icon: Droplets, title: "Su Yalıtımı", desc: "Membranlar, mastik ve su tutucu sistemler", id: "su-yalitimi", photo: "/products/su-yalitimi.jpg" },
-  { icon: Layers, title: "Isı Yalıtımı", desc: "EPS, XPS, taş yünü ve cam yünü", id: "isi-yalitimi", photo: "/products/isi-yalitimi.jpg" },
-  { icon: Paintbrush, title: "Boya", desc: "İç cephe, dış cephe ve endüstriyel boyalar", id: "boya", photo: "/products/boya.jpg" },
-  { icon: FlaskConical, title: "Yapı Kimyasalları", desc: "Yapıştırıcı, derz dolgu ve katkılar", id: "yapi-kimyasallari", photo: "/products/yapi-kimyasallari.jpg" },
-  { icon: Hammer, title: "Alçı & Sıva", desc: "Alçıpan, sıva ve dekoratif ürünler", id: "alci-siva", photo: "/products/alci-siva.jpg" },
-  { icon: Building2, title: "Yapı Levhaları", desc: "Alçıpan, OSB ve çimento levhalar", id: "yapi-levhalari", photo: "/products/yapi-levhalari.jpg" },
+  { iconName: "Droplets", title: "Su Yalıtımı", desc: "Membranlar, mastik ve su tutucu sistemler", id: "su-yalitimi", photo: "/products/su-yalitimi.jpg" },
+  { iconName: "Layers", title: "Isı Yalıtımı", desc: "EPS, XPS, taş yünü ve cam yünü", id: "isi-yalitimi", photo: "/products/isi-yalitimi.jpg" },
+  { iconName: "Paintbrush", title: "Boya", desc: "İç cephe, dış cephe ve endüstriyel boyalar", id: "boya", photo: "/products/boya.jpg" },
+  { iconName: "FlaskConical", title: "Yapı Kimyasalları", desc: "Yapıştırıcı, derz dolgu ve katkılar", id: "yapi-kimyasallari", photo: "/products/yapi-kimyasallari.jpg" },
+  { iconName: "Hammer", title: "Alçı & Sıva", desc: "Alçıpan, sıva ve dekoratif ürünler", id: "alci-siva", photo: "/products/alci-siva.jpg" },
+  { iconName: "Building2", title: "Yapı Levhaları", desc: "Alçıpan, OSB ve çimento levhalar", id: "yapi-levhalari", photo: "/products/yapi-levhalari.jpg" },
 ];
 
 function Products() {
@@ -137,39 +132,7 @@ function Products() {
           </p>
         </ScrollReveal>
 
-        <StaggerChildren
-          animation="fade-up"
-          stagger={100}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
-        >
-          {categories.map((cat) => (
-            <Link
-              href={`/urunler#${cat.id}`}
-              key={cat.title}
-              className="group bg-white rounded-sm border border-border hover:border-accent/30 transition-all hover-lift overflow-hidden"
-            >
-              <div className="relative h-48 overflow-hidden img-zoom">
-                <Image
-                  src={cat.photo}
-                  alt={cat.title}
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                <div className="absolute bottom-3 left-4">
-                  <cat.icon size={20} className="text-white" />
-                </div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-lg font-semibold">{cat.title}</h3>
-                <p className="text-muted text-sm mt-2">{cat.desc}</p>
-                <span className="inline-flex items-center gap-1 text-accent text-sm font-medium mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  İncele <ChevronRight size={14} />
-                </span>
-              </div>
-            </Link>
-          ))}
-        </StaggerChildren>
+        <CategoryCarousel categories={categories} />
       </div>
     </section>
   );

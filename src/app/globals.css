@@ -54,39 +54,39 @@ html {
 }
 
 /* ─── Scroll Reveal System ─── */
+/* Animations only activate after JS hydration (body gets data-sr-ready) */
 .sr-base {
-  will-change: transform, opacity;
   transition-property: transform, opacity, filter;
   transition-duration: var(--sr-duration, 700ms);
   transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   transition-delay: var(--sr-delay, 0ms);
 }
 
-/* Initial hidden states per animation type */
-.sr-fade-up {
+/* Initial hidden states — only when JS is ready */
+body[data-sr-ready] .sr-fade-up {
   opacity: 0;
   transform: translateY(40px);
 }
-.sr-fade-down {
+body[data-sr-ready] .sr-fade-down {
   opacity: 0;
   transform: translateY(-40px);
 }
-.sr-fade-left {
+body[data-sr-ready] .sr-fade-left {
   opacity: 0;
   transform: translateX(-50px);
 }
-.sr-fade-right {
+body[data-sr-ready] .sr-fade-right {
   opacity: 0;
   transform: translateX(50px);
 }
-.sr-fade-in {
+body[data-sr-ready] .sr-fade-in {
   opacity: 0;
 }
-.sr-scale-in {
+body[data-sr-ready] .sr-scale-in {
   opacity: 0;
   transform: scale(0.9);
 }
-.sr-blur-in {
+body[data-sr-ready] .sr-blur-in {
   opacity: 0;
   filter: blur(8px);
 }
@@ -112,7 +112,7 @@ html {
 }
 
 /* ─── Stagger Children ─── */
-.stagger-parent > * {
+body[data-sr-ready] .stagger-parent > * {
   opacity: 0;
   transform: translateY(30px);
   transition: opacity var(--sr-duration, 600ms) cubic-bezier(0.16, 1, 0.3, 1),

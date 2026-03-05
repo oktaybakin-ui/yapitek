@@ -2,6 +2,16 @@
 
 import { useEffect, useRef, type ReactNode } from "react";
 
+/* Mark body as JS-ready so CSS animations activate only after hydration */
+let srReady = false;
+function ensureSrReady() {
+  if (srReady) return;
+  srReady = true;
+  if (typeof document !== "undefined") {
+    document.body.setAttribute("data-sr-ready", "");
+  }
+}
+
 type Animation =
   | "fade-up"
   | "fade-down"
@@ -36,6 +46,7 @@ export default function ScrollReveal({
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    ensureSrReady();
     const el = ref.current;
     if (!el) return;
 
@@ -93,6 +104,7 @@ export function StaggerChildren({
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    ensureSrReady();
     const el = ref.current;
     if (!el) return;
 
@@ -115,7 +127,7 @@ export function StaggerChildren({
   return (
     <div
       ref={ref}
-      className={`stagger-parent sr-${animation} ${className}`}
+      className={`stagger-parent ${className}`}
       style={{
         "--sr-stagger": `${stagger}ms`,
         "--sr-duration": `${duration}ms`,
