@@ -4,15 +4,19 @@ const brands = [
   { name: "İzocam", logo: "/brands/izocam.svg" },
   { name: "Knauf", logo: "/brands/knauf.png" },
   { name: "Weber", logo: "/brands/weber.svg" },
-  { name: "Betek", logo: "/brands/betek.png" },
+  { name: "FIXA", logo: "/brands/fixa.png" },
+  { name: "Dalsan", logo: "/brands/dalsan.png" },
+  { name: "ABS", logo: "/brands/abs.png" },
   { name: "Filli Boya", logo: "/brands/filli-boya.png" },
   { name: "DYO", logo: "/brands/dyo.png" },
   { name: "Marshall", logo: "/brands/marshall.png" },
   { name: "Polisan", logo: "/brands/polisan.png" },
+  { name: "Betek", logo: "/brands/betek.png" },
   { name: "Hekim Yapı", logo: "/brands/hekim-yapi.png" },
   { name: "Kalekim", logo: "/brands/kalekim.svg" },
   { name: "Ytong", logo: "/brands/ytong.png" },
   { name: "Rigips", logo: "/brands/rigips.png" },
+  { name: "Bonus XPS", logo: "/brands/bonus-xps.svg" },
 ];
 
 function BrandItem({ name, logo }: { name: string; logo: string }) {
