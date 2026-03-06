@@ -20,7 +20,8 @@ export default function Footer() {
               alt="YapıTek"
               width={140}
               height={42}
-              className="h-10 w-auto brightness-0 invert"
+              className="h-10 w-auto"
+              style={{ filter: "brightness(0) invert(1)" }}
             />
             <p className="text-white/50 text-sm mt-5 leading-relaxed">
               Taah. Yapı Malzemeleri Tic. Ltd. Şti.
