@@ -144,3 +144,85 @@ export async function getSocialLinks(): Promise<SocialLinks> {
   const content = await getCorporateContent();
   return { ...defaultSocial, ...(content.social as Partial<SocialLinks> | undefined) };
 }
+
+export interface HomepageContent {
+  hero: {
+    badge: string;
+    title1: string;
+    title2: string;
+    subtitle: string;
+    stats: { label: string; value: number; suffix: string }[];
+  };
+  advantages: {
+    items: { icon: string; title: string; desc: string }[];
+  };
+  about_preview: {
+    heading: string;
+    description: string;
+    bullets: string[];
+    image_url: string;
+  };
+  calculator: {
+    heading: string;
+    description: string;
+  };
+  cta: {
+    heading: string;
+    description: string;
+    phone: string;
+  };
+}
+
+const defaultHomepage: HomepageContent = {
+  hero: {
+    badge: "Yapı Malzemeleri Tedarikçiniz",
+    title1: "Projeleriniz İçin",
+    title2: "Güvenilir Çözüm Ortağı",
+    subtitle: "Yalıtım, boya, alçı, yapı kimyasalları ve daha fazlası. Sektörün lider markalarının yetkili satış noktasıyız.",
+    stats: [
+      { label: "Ürün Çeşidi", value: 500, suffix: "+" },
+      { label: "Mutlu Müşteri", value: 1000, suffix: "+" },
+      { label: "Yıllık Deneyim", value: 15, suffix: "+" },
+      { label: "Marka Ortağı", value: 50, suffix: "+" },
+    ],
+  },
+  advantages: {
+    items: [
+      { icon: "Truck", title: "Hızlı Teslimat", desc: "Siparişleriniz en kısa sürede şantiyenizde" },
+      { icon: "Shield", title: "Garantili Ürünler", desc: "Tüm ürünlerimiz orijinal ve garantili" },
+      { icon: "Award", title: "Kalite Belgeli", desc: "TSE ve CE belgeli ürün yelpazesi" },
+      { icon: "Headphones", title: "Teknik Destek", desc: "Uzman kadromuz her zaman yanınızda" },
+    ],
+  },
+  about_preview: {
+    heading: "Yapı Sektöründe 15 Yılı Aşkın Tecrübe",
+    description: "YapıTek olarak, yapı malzemeleri sektöründe uzun yıllara dayanan deneyimimizle müşterilerimize kaliteli ürünler ve profesyonel hizmet sunuyoruz. Türkiye genelindeki projelere güvenilir tedarik sağlıyoruz.",
+    bullets: [
+      "500+ ürün çeşidi ile geniş ürün yelpazesi",
+      "Sektörün önde gelen markalarının yetkili bayisi",
+      "Proje bazlı teknik danışmanlık hizmeti",
+      "Türkiye genelinde hızlı teslimat ağı",
+    ],
+    image_url: "",
+  },
+  calculator: {
+    heading: "Malzeme İhtiyacınızı Hesaplayın",
+    description: "Boya, yalıtım ve sıva için online hesaplama aracımızı kullanın.",
+  },
+  cta: {
+    heading: "Projeniz İçin Teklif Alın",
+    description: "Yapı malzemesi ihtiyaçlarınız için uzman ekibimizle iletişime geçin.",
+    phone: "+90 (532) 301 54 25",
+  },
+};
+
+export async function getHomepageContent(): Promise<HomepageContent> {
+  const content = await getCorporateContent();
+  return {
+    hero: { ...defaultHomepage.hero, ...(content.hero as Partial<HomepageContent["hero"]> | undefined) },
+    advantages: { ...defaultHomepage.advantages, ...(content.advantages as Partial<HomepageContent["advantages"]> | undefined) },
+    about_preview: { ...defaultHomepage.about_preview, ...(content.about_preview as Partial<HomepageContent["about_preview"]> | undefined) },
+    calculator: { ...defaultHomepage.calculator, ...(content.calculator as Partial<HomepageContent["calculator"]> | undefined) },
+    cta: { ...defaultHomepage.cta, ...(content.cta as Partial<HomepageContent["cta"]> | undefined) },
+  };
+}

@@ -10,6 +10,7 @@ import {
   Award,
   Landmark,
   Briefcase,
+  Home,
   LogOut,
   Menu,
   X,
@@ -18,6 +19,7 @@ import { useState } from "react";
 
 const links = [
   { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/admin/anasayfa", label: "Anasayfa", icon: Home },
   { href: "/admin/kategoriler", label: "Kategoriler", icon: FolderOpen },
   { href: "/admin/urunler", label: "Ürünler", icon: Package },
   { href: "/admin/projeler", label: "Projeler", icon: Building2 },

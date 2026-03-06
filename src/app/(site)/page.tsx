@@ -18,11 +18,14 @@ import {
   ArrowRight,
   Phone,
   CheckCircle,
+  Star,
+  Clock,
+  Users,
 } from "lucide-react";
-import { getCategories } from "@/lib/data";
+import { getCategories, getHomepageContent, type HomepageContent } from "@/lib/data";
 
 /* ───────────── HERO ───────────── */
-function Hero() {
+function Hero({ data }: { data: HomepageContent["hero"] }) {
   return (
     <section className="relative bg-surface-dark overflow-hidden">
       <HeroSlider />
@@ -30,16 +33,15 @@ function Hero() {
       <div className="relative mx-auto max-w-7xl px-6 py-24 md:py-32 lg:py-40">
         <div className="max-w-3xl">
           <div className="hero-animate hero-animate-1 inline-block text-xs font-semibold uppercase tracking-widest text-accent border border-accent/30 px-4 py-1.5 rounded mb-6">
-            Yapı Malzemeleri Tedarikçiniz
+            {data.badge}
           </div>
           <h1 className="hero-animate hero-animate-2 text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white">
-            Projeleriniz İçin
+            {data.title1}
             <br />
-            <span className="text-accent">Güvenilir Çözüm Ortağı</span>
+            <span className="text-accent">{data.title2}</span>
           </h1>
           <p className="hero-animate hero-animate-3 mt-6 text-lg text-white/60 max-w-xl leading-relaxed">
-            Yalıtım, boya, alçı, yapı kimyasalları ve daha fazlası.
-            Sektörün lider markalarının yetkili satış noktasıyız.
+            {data.subtitle}
           </p>
           <div className="hero-animate hero-animate-4 mt-10 flex flex-col sm:flex-row gap-4">
             <Link
@@ -62,15 +64,10 @@ function Hero() {
         <div className="hero-animate hero-animate-5 mt-20 border-t border-white/10 pt-10">
           <div className="hero-line h-px bg-accent/40 mb-10" />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { num: 500, suffix: "+", label: "Ürün Çeşidi" },
-              { num: 1000, suffix: "+", label: "Mutlu Müşteri" },
-              { num: 15, suffix: "+", label: "Yıllık Deneyim" },
-              { num: 50, suffix: "+", label: "Marka Ortağı" },
-            ].map((s) => (
+            {data.stats.map((s) => (
               <div key={s.label}>
                 <AnimatedCounter
-                  target={s.num}
+                  target={s.value}
                   suffix={s.suffix}
                   className="text-2xl md:text-3xl font-bold text-white"
                 />
@@ -85,14 +82,18 @@ function Hero() {
 }
 
 /* ───────────── AVANTAJLAR ───────────── */
-const advantages = [
-  { icon: Truck, title: "Hızlı Teslimat", desc: "Siparişleriniz en kısa sürede şantiyenizde" },
-  { icon: Shield, title: "Garantili Ürünler", desc: "Tüm ürünlerimiz orijinal ve garantili" },
-  { icon: Award, title: "Kalite Belgeli", desc: "TSE ve CE belgeli ürün yelpazesi" },
-  { icon: Headphones, title: "Teknik Destek", desc: "Uzman kadromuz her zaman yanınızda" },
-];
+const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
+  Truck,
+  Shield,
+  Award,
+  Headphones,
+  CheckCircle,
+  Star,
+  Clock,
+  Users,
+};
 
-function Advantages() {
+function Advantages({ data }: { data: HomepageContent["advantages"] }) {
   return (
     <section className="py-14 bg-card border-b border-border">
       <StaggerChildren
@@ -100,17 +101,20 @@ function Advantages() {
         stagger={120}
         className="mx-auto max-w-7xl px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
       >
-        {advantages.map((item) => (
-          <div key={item.title} className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded bg-accent/10 flex items-center justify-center shrink-0">
-              <item.icon size={22} className="text-accent" />
+        {data.items.map((item) => {
+          const Icon = iconMap[item.icon] || Shield;
+          return (
+            <div key={item.title} className="flex items-start gap-4">
+              <div className="w-12 h-12 rounded bg-accent/10 flex items-center justify-center shrink-0">
+                <Icon size={22} className="text-accent" />
+              </div>
+              <div>
+                <h3 className="font-semibold">{item.title}</h3>
+                <p className="text-muted text-sm mt-1">{item.desc}</p>
+              </div>
             </div>
-            <div>
-              <h3 className="font-semibold">{item.title}</h3>
-              <p className="text-muted text-sm mt-1">{item.desc}</p>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </StaggerChildren>
     </section>
   );
@@ -135,27 +139,19 @@ function Products({ categories }: { categories: { iconName: string; title: strin
 }
 
 /* ───────────── HAKKIMIZDA ÖN İZLEME ───────────── */
-function AboutPreview() {
+function AboutPreview({ data }: { data: HomepageContent["about_preview"] }) {
   return (
     <section className="py-20 bg-card">
       <div className="mx-auto max-w-7xl px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <ScrollReveal animation="fade-right">
           <h2 className="text-3xl font-bold">
-            Yapı Sektöründe 15 Yılı Aşkın Tecrübe
+            {data.heading}
           </h2>
           <p className="text-muted mt-5 leading-relaxed">
-            YapıTek olarak, yapı malzemeleri sektöründe uzun yıllara dayanan
-            deneyimimizle müşterilerimize kaliteli ürünler ve profesyonel
-            hizmet sunuyoruz. Türkiye genelindeki projelere güvenilir
-            tedarik sağlıyoruz.
+            {data.description}
           </p>
           <ul className="mt-6 space-y-3">
-            {[
-              "500+ ürün çeşidi ile geniş ürün yelpazesi",
-              "Sektörün önde gelen markalarının yetkili bayisi",
-              "Proje bazlı teknik danışmanlık hizmeti",
-              "Türkiye genelinde hızlı teslimat ağı",
-            ].map((item) => (
+            {data.bullets.map((item) => (
               <li key={item} className="flex items-start gap-3 text-sm">
                 <CheckCircle size={16} className="text-accent shrink-0 mt-0.5" />
                 <span>{item}</span>
@@ -173,7 +169,7 @@ function AboutPreview() {
         <ScrollReveal animation="fade-left" delay={200}>
           <div className="relative aspect-[4/3] rounded-sm overflow-hidden img-zoom">
             <Image
-              src="/about-preview.jpg"
+              src={data.image_url || "/about-preview.jpg"}
               alt="YapıTek inşaat projesi"
               fill
               className="object-cover"
@@ -189,15 +185,15 @@ function AboutPreview() {
 }
 
 /* ───────────── HESAPLAMA CTA ───────────── */
-function CalculatorBanner() {
+function CalculatorBanner({ data }: { data: HomepageContent["calculator"] }) {
   return (
     <ScrollReveal animation="fade-in">
       <section className="bg-accent">
         <div className="mx-auto max-w-7xl px-6 py-14 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-white">
-            <h2 className="text-2xl font-bold">Malzeme İhtiyacınızı Hesaplayın</h2>
+            <h2 className="text-2xl font-bold">{data.heading}</h2>
             <p className="text-white/60 mt-1">
-              Boya, yalıtım ve sıva için online hesaplama aracımızı kullanın.
+              {data.description}
             </p>
           </div>
           <Link
@@ -214,13 +210,14 @@ function CalculatorBanner() {
 }
 
 /* ───────────── CTA ───────────── */
-function CTA() {
+function CTA({ data }: { data: HomepageContent["cta"] }) {
+  const telHref = `tel:${data.phone.replace(/[\s()-]/g, "")}`;
   return (
     <section className="py-20 bg-card">
       <ScrollReveal animation="scale-in" className="mx-auto max-w-3xl px-6 text-center">
-        <h2 className="text-3xl font-bold">Projeniz İçin Teklif Alın</h2>
+        <h2 className="text-3xl font-bold">{data.heading}</h2>
         <p className="text-muted mt-3">
-          Yapı malzemesi ihtiyaçlarınız için uzman ekibimizle iletişime geçin.
+          {data.description}
         </p>
         <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
           <Link
@@ -231,11 +228,11 @@ function CTA() {
             <ArrowRight size={16} />
           </Link>
           <a
-            href="tel:+905323015425"
+            href={telHref}
             className="inline-flex items-center gap-2 border border-foreground/20 text-foreground px-7 py-3.5 rounded font-semibold hover:bg-foreground hover:text-surface-dark transition-colors"
           >
             <Phone size={16} />
-            +90 (532) 301 54 25
+            {data.phone}
           </a>
         </div>
       </ScrollReveal>
@@ -244,7 +241,10 @@ function CTA() {
 }
 
 export default async function Home() {
-  const dbCategories = await getCategories();
+  const [dbCategories, homepage] = await Promise.all([
+    getCategories(),
+    getHomepageContent(),
+  ]);
   const categories = dbCategories.map((c) => ({
     iconName: c.icon_name,
     title: c.title,
@@ -255,13 +255,13 @@ export default async function Home() {
 
   return (
     <>
-      <Hero />
-      <Advantages />
+      <Hero data={homepage.hero} />
+      <Advantages data={homepage.advantages} />
       <Products categories={categories} />
-      <AboutPreview />
-      <CalculatorBanner />
+      <AboutPreview data={homepage.about_preview} />
+      <CalculatorBanner data={homepage.calculator} />
       <BrandMarquee />
-      <CTA />
+      <CTA data={homepage.cta} />
     </>
   );
 }
