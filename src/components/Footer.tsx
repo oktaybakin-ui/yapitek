@@ -15,14 +15,15 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           <div>
-            <Image
-              src="/logo.png"
-              alt="YapıTek"
-              width={140}
-              height={42}
-              className="h-10 w-auto"
-              style={{ filter: "brightness(0) invert(1)" }}
-            />
+            <div className="inline-block bg-white rounded px-3 py-2">
+              <Image
+                src="/logo.png"
+                alt="YapıTek"
+                width={140}
+                height={42}
+                className="h-8 w-auto"
+              />
+            </div>
             <p className="text-white/50 text-sm mt-5 leading-relaxed">
               Taah. Yapı Malzemeleri Tic. Ltd. Şti.
               <br />
