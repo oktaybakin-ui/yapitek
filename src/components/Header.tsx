@@ -17,6 +17,7 @@ const navLinks = [
   { href: "/hakkimizda", label: "Kurumsal" },
   { href: "/urunler", label: "Ürünler" },
   { href: "/hizmetler", label: "Hizmetler" },
+  { href: "/projelerimiz", label: "Projelerimiz" },
   { href: "/hesaplama", label: "Hesaplama" },
   { href: "/referanslar", label: "Referanslar" },
   { href: "/iletisim", label: "İletişim" },
