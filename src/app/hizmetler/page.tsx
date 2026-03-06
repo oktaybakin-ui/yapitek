@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Truck,
   Users,
@@ -37,6 +38,7 @@ const services = [
   {
     icon: Package,
     title: "Toptan ve Perakende Satış",
+    image: "/services/toptan-satis.jpg",
     desc: "Bireysel müşterilerden büyük inşaat firmalarına kadar her ölçekte satış hizmeti sunuyoruz. Toptan alımlarda özel fiyat avantajları sağlıyoruz.",
     features: [
       "Rekabetçi toptan fiyatlar",
@@ -48,6 +50,7 @@ const services = [
   {
     icon: Users,
     title: "Teknik Danışmanlık",
+    image: "/services/teknik-danismanlik.jpg",
     desc: "Uzman kadromuz, projenizin ihtiyaçlarına göre en uygun malzeme seçiminde size rehberlik eder. Doğru ürünü doğru yerde kullanmanız için teknik destek sağlıyoruz.",
     features: [
       "Ücretsiz teknik destek",
@@ -59,6 +62,7 @@ const services = [
   {
     icon: ClipboardList,
     title: "Proje Bazlı Tedarik",
+    image: "/services/proje-tedarik.jpg",
     desc: "Büyük ölçekli inşaat projeleri için komple malzeme listesi çıkarma ve toplu tedarik hizmeti veriyoruz. Projenizin her aşaması için planlama yapıyoruz.",
     features: [
       "Metraj ve keşif hizmeti",
@@ -70,6 +74,7 @@ const services = [
   {
     icon: Truck,
     title: "Yerinde Teslimat",
+    image: "/services/teslimat.jpg",
     desc: "Kendi araç filomuzla şantiyenize veya projenize doğrudan teslimat yapıyoruz. Zamanında ve hasarsız teslimat garantisi sunuyoruz.",
     features: [
       "Şantiyeye teslim",
@@ -81,6 +86,7 @@ const services = [
   {
     icon: Warehouse,
     title: "Depolama ve Stok Yönetimi",
+    image: "/services/depolama.jpg",
     desc: "Büyük stok kapasitemiz sayesinde ihtiyaç duyduğunuz ürünleri her zaman hazır bulunduruyoruz. Acil ihtiyaçlarınızda hızlı çözüm sunuyoruz.",
     features: [
       "Geniş stok yelpazesi",
@@ -92,6 +98,7 @@ const services = [
   {
     icon: Wrench,
     title: "Satış Sonrası Destek",
+    image: "/services/satis-sonrasi.jpg",
     desc: "Satış sonrası da yanınızdayız. Ürün uygulaması, sorun giderme ve teknik bilgilendirme konularında destek vermeye devam ediyoruz.",
     features: [
       "Uygulama desteği",
@@ -114,22 +121,33 @@ function ServiceCard({
       animation={index % 2 === 0 ? "fade-right" : "fade-left"}
       delay={index * 50}
     >
-      <div className="bg-card rounded border border-border p-8 md:p-10 hover-lift">
-        <div className="flex items-center gap-4 mb-6">
-          <div className="w-14 h-14 rounded-sm bg-accent/10 flex items-center justify-center">
-            <service.icon size={28} className="text-accent" />
+      <div className="bg-card rounded border border-border overflow-hidden hover-lift">
+        <div className="relative h-48 md:h-56">
+          <Image
+            src={service.image}
+            alt={service.title}
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+          <div className="absolute bottom-4 left-6 flex items-center gap-3">
+            <div className="w-11 h-11 rounded bg-white/20 backdrop-blur-sm flex items-center justify-center">
+              <service.icon size={22} className="text-white" />
+            </div>
+            <h2 className="text-xl md:text-2xl font-bold text-white">{service.title}</h2>
           </div>
-          <h2 className="text-xl md:text-2xl font-bold">{service.title}</h2>
         </div>
-        <p className="text-muted leading-relaxed">{service.desc}</p>
-        <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {service.features.map((f) => (
-            <li key={f} className="flex items-center gap-2 text-sm">
-              <CheckCircle size={16} className="text-accent shrink-0" />
-              {f}
-            </li>
-          ))}
-        </ul>
+        <div className="p-8 md:p-10">
+          <p className="text-muted leading-relaxed">{service.desc}</p>
+          <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {service.features.map((f) => (
+              <li key={f} className="flex items-center gap-2 text-sm">
+                <CheckCircle size={16} className="text-accent shrink-0" />
+                {f}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </ScrollReveal>
   );
