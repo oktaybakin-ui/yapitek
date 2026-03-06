@@ -206,7 +206,7 @@ export default function HizmetlerPage() {
                 <ArrowRight size={18} />
               </Link>
               <a
-                href="tel:+90312XXXXXXX"
+                href="tel:+905323015425"
                 className="inline-flex items-center gap-2 border-2 border-accent text-accent px-8 py-3.5 rounded-sm font-semibold hover:bg-accent hover:text-white transition-colors"
               >
                 <Phone size={18} />

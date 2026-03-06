@@ -43,9 +43,9 @@ export default function Header() {
       <div className="hidden lg:block bg-foreground text-white/80 text-xs">
         <div className="mx-auto max-w-7xl px-6 flex items-center justify-between py-2">
           <div className="flex items-center gap-6">
-            <a href="tel:+90312XXXXXXX" className="flex items-center gap-1.5 hover:text-white transition-colors">
+            <a href="tel:+905323015425" className="flex items-center gap-1.5 hover:text-white transition-colors">
               <Phone size={12} />
-              0312 XXX XX XX
+              +90 (532) 301 54 25
             </a>
             <a href="mailto:info@yapitek.tr" className="flex items-center gap-1.5 hover:text-white transition-colors">
               <Mail size={12} />

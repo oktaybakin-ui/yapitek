@@ -233,11 +233,11 @@ function CTA() {
             <ArrowRight size={16} />
           </Link>
           <a
-            href="tel:+90312XXXXXXX"
+            href="tel:+905323015425"
             className="inline-flex items-center gap-2 border border-foreground/20 text-foreground px-7 py-3.5 rounded font-semibold hover:bg-foreground hover:text-white transition-colors"
           >
             <Phone size={16} />
-            0312 XXX XX XX
+            +90 (532) 301 54 25
           </a>
         </div>
       </ScrollReveal>

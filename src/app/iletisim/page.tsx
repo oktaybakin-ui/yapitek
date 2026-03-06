@@ -39,7 +39,7 @@ const contactInfo = [
   {
     icon: Phone,
     title: "Telefon",
-    lines: ["0312 XXX XX XX (Satış)", "0312 XXX XX XX (Teknik)"],
+    lines: ["+90 (532) 301 54 25"],
   },
   {
     icon: Mail,

@@ -31,7 +31,7 @@ export default function Footer() {
               <a href="#" aria-label="Facebook" className="w-9 h-9 bg-white/10 rounded flex items-center justify-center hover:bg-accent transition-colors">
                 <Facebook size={16} />
               </a>
-              <a href="#" aria-label="Instagram" className="w-9 h-9 bg-white/10 rounded flex items-center justify-center hover:bg-accent transition-colors">
+              <a href="https://www.instagram.com/yapitekyapi" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-9 h-9 bg-white/10 rounded flex items-center justify-center hover:bg-accent transition-colors">
                 <Instagram size={16} />
               </a>
               <a href="#" aria-label="LinkedIn" className="w-9 h-9 bg-white/10 rounded flex items-center justify-center hover:bg-accent transition-colors">
@@ -72,7 +72,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Phone size={16} className="shrink-0 text-white/30" />
-                0312 XXX XX XX
+                +90 (532) 301 54 25
               </li>
               <li className="flex items-center gap-3">
                 <Mail size={16} className="shrink-0 text-white/30" />
