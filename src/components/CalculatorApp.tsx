@@ -580,7 +580,7 @@ export default function CalculatorApp() {
                       className={`flex items-center gap-2.5 px-3 py-2.5 lg:px-4 lg:py-3 rounded text-xs lg:text-sm font-medium transition-all text-left ${
                         isActive
                           ? "bg-accent text-white shadow-md"
-                          : "bg-white border border-border text-foreground hover:border-accent/30 hover:text-accent"
+                          : "bg-card border border-border text-foreground hover:border-accent/30 hover:text-accent"
                       }`}
                     >
                       <ct.icon

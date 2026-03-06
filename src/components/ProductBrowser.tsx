@@ -39,7 +39,7 @@ interface Category {
 function ProductCard({ product }: { product: Product }) {
   if (product.image) {
     return (
-      <div className="group bg-white rounded border border-border overflow-hidden hover:border-accent/30 hover:shadow-md transition-all">
+      <div className="group bg-card rounded border border-border overflow-hidden hover:border-accent/30 hover:shadow-md transition-all">
         <div className="relative h-40 overflow-hidden bg-background">
           <Image
             src={product.image}
@@ -56,7 +56,7 @@ function ProductCard({ product }: { product: Product }) {
   }
 
   return (
-    <div className="flex items-center gap-3 bg-white rounded border border-border px-4 py-3.5 text-sm hover:border-accent/30 hover:shadow-sm transition-all group">
+    <div className="flex items-center gap-3 bg-card rounded border border-border px-4 py-3.5 text-sm hover:border-accent/30 hover:shadow-sm transition-all group">
       <span className="w-2 h-2 bg-accent/60 rounded-full shrink-0 group-hover:bg-accent transition-colors" />
       <span className="font-medium">{product.name}</span>
     </div>
@@ -95,7 +95,7 @@ export default function ProductBrowser({
                   className={`flex items-center gap-2.5 px-3 py-2.5 lg:px-4 lg:py-3 rounded text-xs lg:text-sm font-medium transition-all text-left ${
                     isActive
                       ? "bg-accent text-white shadow-md"
-                      : "bg-white border border-border text-foreground hover:border-accent/30 hover:text-accent"
+                      : "bg-card border border-border text-foreground hover:border-accent/30 hover:text-accent"
                   }`}
                 >
                   <CatIcon
@@ -200,7 +200,7 @@ export default function ProductBrowser({
         )}
 
         {/* Alt CTA */}
-        <div className="mt-8 flex flex-col sm:flex-row items-center gap-4 bg-white border border-border rounded p-6">
+        <div className="mt-8 flex flex-col sm:flex-row items-center gap-4 bg-card border border-border rounded p-6">
           <div className="flex-1">
             <p className="font-semibold">
               {activeCat.title} için fiyat teklifi alın

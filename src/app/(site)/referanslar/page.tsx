@@ -69,7 +69,7 @@ function BrandPartners() {
           {allBrands.map((brand) => (
             <div
               key={brand.name}
-              className="bg-white rounded border border-border p-6 flex flex-col items-center justify-center gap-3 hover-lift"
+              className="bg-card rounded border border-border p-6 flex flex-col items-center justify-center gap-3 hover-lift"
             >
               <Image
                 src={brand.logo}

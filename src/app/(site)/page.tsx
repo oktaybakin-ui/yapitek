@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import BrandMarquee from "@/components/BrandMarquee";
 import CategoryCarousel from "@/components/CategoryCarousel";
 import ScrollReveal, {
@@ -6,6 +8,7 @@ import ScrollReveal, {
 } from "@/components/ScrollReveal";
 import Link from "next/link";
 import Image from "next/image";
+import HeroSlider from "@/components/HeroSlider";
 import {
   ChevronRight,
   Shield,
@@ -16,12 +19,14 @@ import {
   Phone,
   CheckCircle,
 } from "lucide-react";
+import { getCategories } from "@/lib/data";
 
 /* ───────────── HERO ───────────── */
 function Hero() {
   return (
-    <section className="relative bg-foreground overflow-hidden">
-      <div className="absolute inset-0 bg-[url('/logo.png')] bg-no-repeat bg-center bg-[length:600px] opacity-[0.03]" />
+    <section className="relative bg-surface-dark overflow-hidden">
+      <HeroSlider />
+      <div className="absolute inset-0 bg-gradient-to-r from-surface-dark via-surface-dark/80 to-surface-dark/30" />
       <div className="relative mx-auto max-w-7xl px-6 py-24 md:py-32 lg:py-40">
         <div className="max-w-3xl">
           <div className="hero-animate hero-animate-1 inline-block text-xs font-semibold uppercase tracking-widest text-accent border border-accent/30 px-4 py-1.5 rounded mb-6">
@@ -89,7 +94,7 @@ const advantages = [
 
 function Advantages() {
   return (
-    <section className="py-14 bg-white border-b border-border">
+    <section className="py-14 bg-card border-b border-border">
       <StaggerChildren
         animation="fade-up"
         stagger={120}
@@ -112,16 +117,7 @@ function Advantages() {
 }
 
 /* ───────────── ÜRÜN KATEGORİLERİ ───────────── */
-const categories = [
-  { iconName: "Droplets", title: "Su Yalıtımı", desc: "Membranlar, mastik ve su tutucu sistemler", id: "su-yalitimi", photo: "/products/su-yalitimi.jpg" },
-  { iconName: "Layers", title: "Isı Yalıtımı", desc: "EPS, XPS, taş yünü ve cam yünü", id: "isi-yalitimi", photo: "/products/isi-yalitimi.jpg" },
-  { iconName: "Paintbrush", title: "Boya", desc: "İç cephe, dış cephe ve endüstriyel boyalar", id: "boya", photo: "/products/boya.jpg" },
-  { iconName: "FlaskConical", title: "Yapı Kimyasalları", desc: "Yapıştırıcı, derz dolgu ve katkılar", id: "yapi-kimyasallari", photo: "/products/yapi-kimyasallari.jpg" },
-  { iconName: "Hammer", title: "Alçı & Sıva", desc: "Alçıpan, sıva ve dekoratif ürünler", id: "alci-siva", photo: "/products/alci-siva.jpg" },
-  { iconName: "Building2", title: "Yapı Levhaları", desc: "Alçıpan, OSB ve çimento levhalar", id: "yapi-levhalari", photo: "/products/yapi-levhalari.jpg" },
-];
-
-function Products() {
+function Products({ categories }: { categories: { iconName: string; title: string; desc: string; id: string; photo: string }[] }) {
   return (
     <section className="py-20 bg-background">
       <div className="mx-auto max-w-7xl px-6">
@@ -141,7 +137,7 @@ function Products() {
 /* ───────────── HAKKIMIZDA ÖN İZLEME ───────────── */
 function AboutPreview() {
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-card">
       <div className="mx-auto max-w-7xl px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <ScrollReveal animation="fade-right">
           <h2 className="text-3xl font-bold">
@@ -175,14 +171,16 @@ function AboutPreview() {
         </ScrollReveal>
 
         <ScrollReveal animation="fade-left" delay={200}>
-          <div className="aspect-[4/3] bg-gradient-to-br from-secondary/10 to-secondary/5 rounded-sm flex items-center justify-center">
+          <div className="relative aspect-[4/3] rounded-sm overflow-hidden img-zoom">
             <Image
-              src="/logo.png"
-              alt="YapıTek"
-              width={240}
-              height={72}
-              className="opacity-20"
+              src="/about-preview.jpg"
+              alt="YapıTek inşaat projesi"
+              fill
+              className="object-cover"
+              quality={85}
+              sizes="(max-width: 1024px) 100vw, 50vw"
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-surface-dark/40 to-transparent" />
           </div>
         </ScrollReveal>
       </div>
@@ -218,7 +216,7 @@ function CalculatorBanner() {
 /* ───────────── CTA ───────────── */
 function CTA() {
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-card">
       <ScrollReveal animation="scale-in" className="mx-auto max-w-3xl px-6 text-center">
         <h2 className="text-3xl font-bold">Projeniz İçin Teklif Alın</h2>
         <p className="text-muted mt-3">
@@ -234,7 +232,7 @@ function CTA() {
           </Link>
           <a
             href="tel:+905323015425"
-            className="inline-flex items-center gap-2 border border-foreground/20 text-foreground px-7 py-3.5 rounded font-semibold hover:bg-foreground hover:text-white transition-colors"
+            className="inline-flex items-center gap-2 border border-foreground/20 text-foreground px-7 py-3.5 rounded font-semibold hover:bg-foreground hover:text-surface-dark transition-colors"
           >
             <Phone size={16} />
             +90 (532) 301 54 25
@@ -245,12 +243,21 @@ function CTA() {
   );
 }
 
-export default function Home() {
+export default async function Home() {
+  const dbCategories = await getCategories();
+  const categories = dbCategories.map((c) => ({
+    iconName: c.icon_name,
+    title: c.title,
+    desc: c.description,
+    id: c.id,
+    photo: c.photo_url,
+  }));
+
   return (
     <>
       <Hero />
       <Advantages />
-      <Products />
+      <Products categories={categories} />
       <AboutPreview />
       <CalculatorBanner />
       <BrandMarquee />

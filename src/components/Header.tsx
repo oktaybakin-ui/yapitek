@@ -41,7 +41,7 @@ export default function Header() {
       }`}
     >
       {/* Üst bilgi çubuğu */}
-      <div className="hidden lg:block bg-foreground text-white/80 text-xs">
+      <div className="hidden lg:block bg-surface-dark text-white/80 text-xs">
         <div className="mx-auto max-w-7xl px-6 flex items-center justify-between py-2">
           <div className="flex items-center gap-6">
             <a href="tel:+905323015425" className="flex items-center gap-1.5 hover:text-white transition-colors">
@@ -61,15 +61,15 @@ export default function Header() {
       </div>
 
       {/* Ana navigasyon */}
-      <nav className="bg-white border-b border-border">
+      <nav className="bg-card border-b border-border">
         <div className="mx-auto max-w-7xl px-6 flex items-center justify-between h-20">
-          <Link href="/" className="shrink-0">
+          <Link href="/" className="shrink-0 inline-block bg-white rounded px-3 py-1.5">
             <Image
               src="/logo.png"
               alt="YapıTek Yapı Malzemeleri"
               width={160}
               height={48}
-              className="h-12 w-auto"
+              className="h-10 w-auto"
               priority
             />
           </Link>
@@ -120,7 +120,7 @@ export default function Header() {
         {/* Mobil menü - animated */}
         <div
           ref={mobileRef}
-          className={`lg:hidden border-t border-border bg-white overflow-hidden transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          className={`lg:hidden border-t border-border bg-card overflow-hidden transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] ${
             mobileOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
           }`}
         >

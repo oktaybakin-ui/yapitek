@@ -213,11 +213,11 @@ function ContactForm() {
 function Map() {
   return (
     <ScrollReveal animation="fade-in">
-      <section className="bg-foreground">
+      <section className="bg-surface-dark">
         <div className="mx-auto max-w-7xl px-6 py-10">
-          <div className="rounded border border-white/10 overflow-hidden h-96">
+          <div className="relative rounded border border-white/10 overflow-hidden h-96">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3060.1!2d32.8083!3d39.9142!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d34f00a37f9b5b%3A0x0!2zU8O2xJ_DvHTDtnrDvCBNYWguIFPDtsSfw7x0w7Z6w7wgQ2QuIE5vOjIvQS0xMywgw4dhbmtheWEvQW5rYXJh!5e0!3m2!1str!2str!4v1"
+              src="https://www.google.com/maps?q=Koç+Kuleleri,+Söğütözü+Mahallesi,+Söğütözü+Caddesi,+Çankaya,+Ankara&output=embed"
               width="100%"
               height="100%"
               style={{ border: 0, filter: "grayscale(100%) contrast(1.1) invert(92%) hue-rotate(180deg)" }}
@@ -226,6 +226,14 @@ function Map() {
               referrerPolicy="no-referrer-when-downgrade"
               title="YapıTek Konum"
             />
+            {/* Logo overlay on pin */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-full pointer-events-none z-10 flex flex-col items-center">
+              <div className="bg-white rounded-lg shadow-xl p-1.5">
+                <img src="/logo.png" alt="YapıTek" className="h-8 w-auto" />
+              </div>
+              <div className="w-3 h-3 bg-accent rotate-45 -mt-1.5 shadow-md" />
+              <div className="w-2.5 h-2.5 bg-accent rounded-full mt-0.5 shadow-md" />
+            </div>
           </div>
           <div className="flex items-center gap-3 mt-4 text-white/50 text-sm">
             <MapPin size={16} className="text-accent" />

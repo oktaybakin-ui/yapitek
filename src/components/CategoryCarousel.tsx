@@ -101,14 +101,14 @@ export default function CategoryCarousel({
         {/* Arrow buttons */}
         <button
           onClick={prev}
-          className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-20 w-10 h-10 bg-white border border-border rounded-full shadow-md flex items-center justify-center hover:bg-accent hover:text-white hover:border-accent transition-colors hidden md:flex"
+          className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-20 w-10 h-10 bg-card border border-border rounded-full shadow-md flex items-center justify-center hover:bg-accent hover:text-white hover:border-accent transition-colors hidden md:flex"
           aria-label="Önceki"
         >
           <ChevronLeft size={18} />
         </button>
         <button
           onClick={next}
-          className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-20 w-10 h-10 bg-white border border-border rounded-full shadow-md flex items-center justify-center hover:bg-accent hover:text-white hover:border-accent transition-colors hidden md:flex"
+          className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-20 w-10 h-10 bg-card border border-border rounded-full shadow-md flex items-center justify-center hover:bg-accent hover:text-white hover:border-accent transition-colors hidden md:flex"
           aria-label="Sonraki"
         >
           <ChevronRight size={18} />
@@ -184,7 +184,7 @@ export default function CategoryCarousel({
             className={`px-4 py-2 rounded-full text-xs font-medium transition-all duration-300 ${
               current === i
                 ? "bg-accent text-white shadow-md"
-                : "bg-white border border-border text-muted hover:border-accent/30 hover:text-accent"
+                : "bg-card border border-border text-muted hover:border-accent/30 hover:text-accent"
             }`}
           >
             {cat.title}

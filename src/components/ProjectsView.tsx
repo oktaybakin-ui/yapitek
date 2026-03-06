@@ -7,8 +7,9 @@ import {
   MapPin,
   CheckCircle2,
   Clock,
-  ArrowRight,
   ChevronRight,
+  ChevronLeft,
+  X,
 } from "lucide-react";
 
 interface CompletedProject {
@@ -18,6 +19,7 @@ interface CompletedProject {
   desc: string;
   materials: string[];
   image: string;
+  images?: string[];
 }
 
 interface OngoingProject {
@@ -28,25 +30,183 @@ interface OngoingProject {
   materials: string[];
   progress: number;
   image: string;
+  images?: string[];
 }
 
-function CompletedCard({ project }: { project: CompletedProject }) {
+/* ── Lightbox ── */
+function Lightbox({
+  images,
+  index,
+  onClose,
+  onPrev,
+  onNext,
+}: {
+  images: string[];
+  index: number;
+  onClose: () => void;
+  onPrev: () => void;
+  onNext: () => void;
+}) {
   return (
-    <div className="bg-card rounded border border-border overflow-hidden hover-lift group">
-      <div className="relative h-48 overflow-hidden bg-background">
+    <div
+      className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center"
+      onClick={onClose}
+    >
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          onClose();
+        }}
+        className="absolute top-4 right-4 text-white/70 hover:text-white z-10"
+      >
+        <X size={28} />
+      </button>
+
+      {images.length > 1 && (
+        <>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onPrev();
+            }}
+            className="absolute left-4 text-white/70 hover:text-white z-10"
+          >
+            <ChevronLeft size={36} />
+          </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onNext();
+            }}
+            className="absolute right-4 text-white/70 hover:text-white z-10"
+          >
+            <ChevronRight size={36} />
+          </button>
+        </>
+      )}
+
+      <div
+        className="relative w-[90vw] h-[80vh] max-w-5xl"
+        onClick={(e) => e.stopPropagation()}
+      >
         <Image
-          src={project.image}
-          alt={project.title}
+          src={images[index]}
+          alt=""
+          fill
+          className="object-contain"
+          sizes="90vw"
+        />
+      </div>
+
+      {images.length > 1 && (
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+          {images.map((_, i) => (
+            <span
+              key={i}
+              className={`w-2 h-2 rounded-full transition-colors ${
+                i === index ? "bg-white" : "bg-white/30"
+              }`}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ── Image Gallery (card-level) ── */
+function ImageGallery({ images, title }: { images: string[]; title: string }) {
+  const [current, setCurrent] = useState(0);
+  const [lightbox, setLightbox] = useState(false);
+
+  if (images.length === 0) return null;
+
+  return (
+    <>
+      <div
+        className="relative h-48 overflow-hidden bg-background cursor-pointer"
+        onClick={() => setLightbox(true)}
+      >
+        <Image
+          src={images[current]}
+          alt={title}
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-500"
         />
-        <div className="absolute top-3 left-3">
+
+        {images.length > 1 && (
+          <>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setCurrent((c) => (c - 1 + images.length) % images.length);
+              }}
+              className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+            >
+              <ChevronLeft size={16} />
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setCurrent((c) => (c + 1) % images.length);
+              }}
+              className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+            >
+              <ChevronRight size={16} />
+            </button>
+            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5">
+              {images.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setCurrent(i);
+                  }}
+                  className={`w-1.5 h-1.5 rounded-full transition-colors ${
+                    i === current ? "bg-white" : "bg-white/40"
+                  }`}
+                />
+              ))}
+            </div>
+          </>
+        )}
+
+        {images.length > 1 && (
+          <span className="absolute bottom-2 right-2 bg-black/50 backdrop-blur-sm text-white text-[10px] font-medium px-2 py-0.5 rounded-full">
+            {current + 1}/{images.length}
+          </span>
+        )}
+      </div>
+
+      {lightbox && (
+        <Lightbox
+          images={images}
+          index={current}
+          onClose={() => setLightbox(false)}
+          onPrev={() =>
+            setCurrent((c) => (c - 1 + images.length) % images.length)
+          }
+          onNext={() => setCurrent((c) => (c + 1) % images.length)}
+        />
+      )}
+    </>
+  );
+}
+
+function CompletedCard({ project }: { project: CompletedProject }) {
+  const imgs = project.images && project.images.length > 0 ? project.images : [project.image];
+
+  return (
+    <div className="bg-card rounded border border-border overflow-hidden hover-lift group">
+      <div className="relative">
+        <ImageGallery images={imgs} title={project.title} />
+        <div className="absolute top-3 left-3 z-10">
           <span className="bg-green-600 text-white text-xs font-semibold px-2.5 py-1 rounded-full inline-flex items-center gap-1">
             <CheckCircle2 size={12} />
             Tamamlandı
           </span>
         </div>
-        <div className="absolute top-3 right-3">
+        <div className="absolute top-3 right-3 z-10">
           <span className="bg-black/50 backdrop-blur-sm text-white text-xs font-medium px-2.5 py-1 rounded-full">
             {project.category}
           </span>
@@ -77,22 +237,19 @@ function CompletedCard({ project }: { project: CompletedProject }) {
 }
 
 function OngoingCard({ project }: { project: OngoingProject }) {
+  const imgs = project.images && project.images.length > 0 ? project.images : [project.image];
+
   return (
     <div className="bg-card rounded border border-border overflow-hidden hover-lift group">
-      <div className="relative h-48 overflow-hidden bg-background">
-        <Image
-          src={project.image}
-          alt={project.title}
-          fill
-          className="object-cover group-hover:scale-105 transition-transform duration-500"
-        />
-        <div className="absolute top-3 left-3">
+      <div className="relative">
+        <ImageGallery images={imgs} title={project.title} />
+        <div className="absolute top-3 left-3 z-10">
           <span className="bg-amber-500 text-white text-xs font-semibold px-2.5 py-1 rounded-full inline-flex items-center gap-1">
             <Clock size={12} />
             Devam Ediyor
           </span>
         </div>
-        <div className="absolute top-3 right-3">
+        <div className="absolute top-3 right-3 z-10">
           <span className="bg-black/50 backdrop-blur-sm text-white text-xs font-medium px-2.5 py-1 rounded-full">
             {project.category}
           </span>
@@ -117,7 +274,6 @@ function OngoingCard({ project }: { project: OngoingProject }) {
             </span>
           ))}
         </div>
-        {/* İlerleme çubuğu */}
         <div className="mt-4">
           <div className="flex items-center justify-between text-xs mb-1.5">
             <span className="text-muted font-medium">İlerleme</span>
@@ -193,7 +349,6 @@ export default function ProjectsView({
           </button>
         </div>
 
-        {/* Tamamlanan Projeler */}
         {activeTab === "completed" && (
           <div>
             <p className="text-sm text-muted mb-6">
@@ -210,7 +365,6 @@ export default function ProjectsView({
           </div>
         )}
 
-        {/* Devam Eden Projeler */}
         {activeTab === "ongoing" && (
           <div>
             <p className="text-sm text-muted mb-6">
@@ -227,7 +381,6 @@ export default function ProjectsView({
           </div>
         )}
 
-        {/* Alt CTA */}
         <div className="mt-12 flex flex-col sm:flex-row items-center gap-4 bg-card border border-border rounded p-8">
           <div className="flex-1">
             <p className="font-semibold text-lg">

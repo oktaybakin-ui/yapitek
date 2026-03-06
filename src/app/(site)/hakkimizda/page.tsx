@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import {
-  Building2,
   Target,
   Eye,
   Heart,
-  Users,
   CheckCircle,
   ArrowRight,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import ScrollReveal, {
   StaggerChildren,
   AnimatedCounter,
@@ -41,8 +40,16 @@ function AboutContent() {
     <section className="py-20 bg-card">
       <div className="mx-auto max-w-7xl px-6 grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
         <ScrollReveal animation="fade-right">
-          <div className="aspect-[4/3] bg-gradient-to-br from-accent/20 to-accent/5 rounded flex items-center justify-center">
-            <Building2 size={120} className="text-accent/30" />
+          <div className="relative aspect-[4/3] rounded overflow-hidden img-zoom">
+            <Image
+              src="/about-main.jpg"
+              alt="YapıTek yapı malzemeleri"
+              fill
+              className="object-cover"
+              quality={85}
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-surface-dark/30 to-transparent" />
           </div>
         </ScrollReveal>
         <ScrollReveal animation="fade-left" delay={150}>
@@ -187,8 +194,16 @@ function Founder() {
     <section className="py-20 bg-background">
       <div className="mx-auto max-w-7xl px-6 grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
         <ScrollReveal animation="fade-right">
-          <div className="aspect-square max-w-md mx-auto bg-gradient-to-br from-secondary/10 to-secondary/5 rounded-sm flex items-center justify-center">
-            <Users size={80} className="text-secondary/20" />
+          <div className="relative aspect-square max-w-md mx-auto rounded-sm overflow-hidden img-zoom">
+            <Image
+              src="/founder.jpg"
+              alt="Mustafa Yılmaz - YapıTek Kurucusu"
+              fill
+              className="object-cover"
+              quality={85}
+              sizes="(max-width: 1024px) 100vw, 448px"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-surface-dark/30 to-transparent" />
           </div>
         </ScrollReveal>
         <ScrollReveal animation="fade-left" delay={150}>
