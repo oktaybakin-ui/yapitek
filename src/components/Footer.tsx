@@ -8,8 +8,14 @@ import {
   Instagram,
   Linkedin,
 } from "lucide-react";
+import type { ContactInfo, SocialLinks } from "@/lib/data";
 
-export default function Footer() {
+interface Props {
+  contact: ContactInfo;
+  social: SocialLinks;
+}
+
+export default function Footer({ contact, social }: Props) {
   return (
     <footer className="bg-surface-dark text-white">
       <div className="mx-auto max-w-7xl px-6 py-16">
@@ -30,15 +36,21 @@ export default function Footer() {
               Kaliteli yapı malzemeleri ile projelerinizin güvenilir tedarikçisi.
             </p>
             <div className="flex gap-3 mt-6">
-              <a href="#" aria-label="Facebook" className="w-9 h-9 bg-white/10 rounded flex items-center justify-center hover:bg-accent transition-colors">
-                <Facebook size={16} />
-              </a>
-              <a href="https://www.instagram.com/yapitekyapi" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-9 h-9 bg-white/10 rounded flex items-center justify-center hover:bg-accent transition-colors">
-                <Instagram size={16} />
-              </a>
-              <a href="#" aria-label="LinkedIn" className="w-9 h-9 bg-white/10 rounded flex items-center justify-center hover:bg-accent transition-colors">
-                <Linkedin size={16} />
-              </a>
+              {social.facebook && (
+                <a href={social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="w-9 h-9 bg-white/10 rounded flex items-center justify-center hover:bg-accent transition-colors">
+                  <Facebook size={16} />
+                </a>
+              )}
+              {social.instagram && (
+                <a href={social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-9 h-9 bg-white/10 rounded flex items-center justify-center hover:bg-accent transition-colors">
+                  <Instagram size={16} />
+                </a>
+              )}
+              {social.linkedin && (
+                <a href={social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="w-9 h-9 bg-white/10 rounded flex items-center justify-center hover:bg-accent transition-colors">
+                  <Linkedin size={16} />
+                </a>
+              )}
             </div>
           </div>
 
@@ -70,15 +82,15 @@ export default function Footer() {
             <ul className="space-y-4 text-sm text-white/50">
               <li className="flex items-start gap-3">
                 <MapPin size={16} className="mt-0.5 shrink-0 text-white/30" />
-                Söğütözü Mah. Söğütözü Cd. No:2/A-13, Koç Kuleleri, Çankaya/Ankara
+                {contact.address}, {contact.address2}
               </li>
               <li className="flex items-center gap-3">
                 <Phone size={16} className="shrink-0 text-white/30" />
-                +90 (532) 301 54 25
+                {contact.phone}
               </li>
               <li className="flex items-center gap-3">
                 <Mail size={16} className="shrink-0 text-white/30" />
-                info@yapitek.tr
+                {contact.emails[0]}
               </li>
             </ul>
           </div>

@@ -1,9 +1,15 @@
 "use client";
 
-export default function WhatsAppButton() {
+interface Props {
+  phone: string;
+}
+
+export default function WhatsAppButton({ phone }: Props) {
+  if (!phone) return null;
+
   return (
     <a
-      href="https://wa.me/905321234567?text=Merhaba%2C%20bilgi%20almak%20istiyorum."
+      href={`https://wa.me/${phone}?text=Merhaba%2C%20bilgi%20almak%20istiyorum.`}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="WhatsApp ile iletişime geçin"

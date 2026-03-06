@@ -7,6 +7,9 @@ import {
   FolderOpen,
   Package,
   Building2,
+  Award,
+  Landmark,
+  Briefcase,
   LogOut,
   Menu,
   X,
@@ -18,6 +21,9 @@ const links = [
   { href: "/admin/kategoriler", label: "Kategoriler", icon: FolderOpen },
   { href: "/admin/urunler", label: "Ürünler", icon: Package },
   { href: "/admin/projeler", label: "Projeler", icon: Building2 },
+  { href: "/admin/hizmetler", label: "Hizmetler", icon: Briefcase },
+  { href: "/admin/kurumsal", label: "Kurumsal", icon: Landmark },
+  { href: "/admin/referanslar", label: "Referanslar", icon: Award },
 ];
 
 export default function AdminSidebar() {

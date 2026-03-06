@@ -12,11 +12,60 @@ import ScrollReveal, {
   StaggerChildren,
   AnimatedCounter,
 } from "@/components/ScrollReveal";
+import { getCorporateContent } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Hakkımızda",
   description:
     "YapıTek Yapı Malzemeleri hakkında bilgi edinin. 15 yılı aşkın deneyimimizle yapı sektörünün güvenilir tedarikçisiyiz.",
+};
+
+// Fallback değerler (DB boşken kullanılır)
+const fallbackAbout = {
+  description:
+    "YapıTek olarak 2010 yılından bu yana yapı sektöründe faaliyet göstermekteyiz. Yalıtım malzemelerinden boyalara, yapı kimyasallarından alçı ürünlerine kadar geniş bir yelpazede, sektörün önde gelen markalarının yetkili satıcısı olarak hizmet sunmaktayız.",
+  description2:
+    "Müşteri memnuniyetini her zaman ön planda tutarak, kaliteli ürünleri uygun fiyatlarla sunmayı, teknik danışmanlık hizmetleri ile projelerinize değer katmayı hedefliyoruz. Deneyimli ekibimiz ve güçlü lojistik altyapımız ile Türkiye genelinde hizmet vermekteyiz.",
+  image_url: "/about-main.jpg",
+  stats: [
+    { label: "Ürün Çeşidi", value: 500, suffix: "+" },
+    { label: "Mutlu Müşteri", value: 1000, suffix: "+" },
+    { label: "Yıllık Deneyim", value: 15, suffix: "+" },
+    { label: "Marka Ortağı", value: 50, suffix: "+" },
+  ],
+};
+
+const fallbackMission = {
+  mission_title: "Misyonumuz",
+  mission_desc:
+    "Yapı sektörüne kaliteli malzemeler sunarak, projelerinizin güvenli ve sürdürülebilir olmasını sağlamak. Müşterilerimize teknik destek ve danışmanlık hizmetleri ile değer katmak.",
+  vision_title: "Vizyonumuz",
+  vision_desc:
+    "Türkiye'nin en güvenilir ve tercih edilen yapı malzemeleri tedarikçisi olmak. Yenilikçi çözümler ve güçlü marka ortaklıkları ile sektöre yön vermek.",
+  values_title: "Değerlerimiz",
+  values_desc:
+    "Dürüstlük, kalite odaklılık, müşteri memnuniyeti ve sürekli gelişim. Bu değerler iş yapma biçimimizin temelini oluşturmaktadır.",
+};
+
+const fallbackReasons = [
+  "Türkiye'nin önde gelen markalarının yetkili bayisi",
+  "Profesyonel teknik danışmanlık hizmeti",
+  "Rekabetçi fiyat politikası",
+  "Hızlı ve güvenilir teslimat ağı",
+  "TSE ve CE belgeli ürün yelpazesi",
+  "Proje bazlı toplu tedarik imkanı",
+  "Satış sonrası teknik destek",
+  "Uzman ve deneyimli kadro",
+];
+
+const fallbackFounder = {
+  name: "Mustafa Yılmaz",
+  title: "Kurucu",
+  description:
+    "YapıTek Taah. Yapı Malzemeleri'nin kurucusu Mustafa Yılmaz, yapı sektöründe 15 yılı aşkın deneyime sahiptir. Sektördeki derin bilgi birikimi ve vizyoner yaklaşımıyla YapıTek'i Türkiye'nin güvenilir yapı malzemeleri tedarikçilerinden biri haline getirmiştir.",
+  description2:
+    "Müşteri memnuniyetini ve kaliteyi iş felsefesinin merkezine koyan Mustafa Yılmaz, firmanın sürdürülebilir büyümesi ve sektörel gelişimi için çalışmalarına devam etmektedir.",
+  image_url: "/founder.jpg",
 };
 
 /* ───────────── SAYFA BANNER ───────────── */
@@ -35,14 +84,14 @@ function PageBanner() {
 }
 
 /* ───────────── HAKKIMIZDA İÇERİK ───────────── */
-function AboutContent() {
+function AboutContent({ data }: { data: typeof fallbackAbout }) {
   return (
     <section className="py-20 bg-card">
       <div className="mx-auto max-w-7xl px-6 grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
         <ScrollReveal animation="fade-right">
           <div className="relative aspect-[4/3] rounded overflow-hidden img-zoom">
             <Image
-              src="/about-main.jpg"
+              src={data.image_url || "/about-main.jpg"}
               alt="YapıTek yapı malzemeleri"
               fill
               className="object-cover"
@@ -59,30 +108,13 @@ function AboutContent() {
           <h2 className="text-3xl md:text-4xl font-bold mt-2">
             YapıTek Yapı Malzemeleri
           </h2>
-          <p className="text-muted mt-6 leading-relaxed">
-            YapıTek olarak 2010 yılından bu yana yapı sektöründe faaliyet
-            göstermekteyiz. Yalıtım malzemelerinden boyalara, yapı
-            kimyasallarından alçı ürünlerine kadar geniş bir yelpazede,
-            sektörün önde gelen markalarının yetkili satıcısı olarak hizmet
-            sunmaktayız.
-          </p>
-          <p className="text-muted mt-4 leading-relaxed">
-            Müşteri memnuniyetini her zaman ön planda tutarak, kaliteli
-            ürünleri uygun fiyatlarla sunmayı, teknik danışmanlık hizmetleri
-            ile projelerinize değer katmayı hedefliyoruz. Deneyimli ekibimiz
-            ve güçlü lojistik altyapımız ile Türkiye genelinde hizmet
-            vermekteyiz.
-          </p>
+          <p className="text-muted mt-6 leading-relaxed">{data.description}</p>
+          <p className="text-muted mt-4 leading-relaxed">{data.description2}</p>
           <div className="mt-8 grid grid-cols-2 gap-6">
-            {[
-              { num: 500, suffix: "+", label: "Ürün Çeşidi" },
-              { num: 1000, suffix: "+", label: "Mutlu Müşteri" },
-              { num: 15, suffix: "+", label: "Yıllık Deneyim" },
-              { num: 50, suffix: "+", label: "Marka Ortağı" },
-            ].map((s) => (
+            {data.stats.map((s) => (
               <div key={s.label} className="bg-background rounded p-5">
                 <AnimatedCounter
-                  target={s.num}
+                  target={s.value}
                   suffix={s.suffix}
                   className="text-3xl font-bold text-accent"
                 />
@@ -97,25 +129,15 @@ function AboutContent() {
 }
 
 /* ───────────── MİSYON VİZYON DEĞERLER ───────────── */
-const values = [
-  {
-    icon: Target,
-    title: "Misyonumuz",
-    desc: "Yapı sektörüne kaliteli malzemeler sunarak, projelerinizin güvenli ve sürdürülebilir olmasını sağlamak. Müşterilerimize teknik destek ve danışmanlık hizmetleri ile değer katmak.",
-  },
-  {
-    icon: Eye,
-    title: "Vizyonumuz",
-    desc: "Türkiye'nin en güvenilir ve tercih edilen yapı malzemeleri tedarikçisi olmak. Yenilikçi çözümler ve güçlü marka ortaklıkları ile sektöre yön vermek.",
-  },
-  {
-    icon: Heart,
-    title: "Değerlerimiz",
-    desc: "Dürüstlük, kalite odaklılık, müşteri memnuniyeti ve sürekli gelişim. Bu değerler iş yapma biçimimizin temelini oluşturmaktadır.",
-  },
-];
+const iconMap = { mission: Target, vision: Eye, values: Heart };
 
-function MissionVision() {
+function MissionVision({ data }: { data: typeof fallbackMission }) {
+  const sections = [
+    { key: "mission" as const, title: data.mission_title, desc: data.mission_desc },
+    { key: "vision" as const, title: data.vision_title, desc: data.vision_desc },
+    { key: "values" as const, title: data.values_title, desc: data.values_desc },
+  ];
+
   return (
     <section className="py-20 bg-background">
       <div className="mx-auto max-w-7xl px-6">
@@ -124,18 +146,21 @@ function MissionVision() {
           stagger={150}
           className="grid grid-cols-1 md:grid-cols-3 gap-8"
         >
-          {values.map((v) => (
-            <div
-              key={v.title}
-              className="bg-card rounded p-8 border border-border hover-lift"
-            >
-              <div className="w-14 h-14 rounded-sm bg-accent/10 flex items-center justify-center mb-5">
-                <v.icon size={28} className="text-accent" />
+          {sections.map((v) => {
+            const Icon = iconMap[v.key];
+            return (
+              <div
+                key={v.key}
+                className="bg-card rounded p-8 border border-border hover-lift"
+              >
+                <div className="w-14 h-14 rounded-sm bg-accent/10 flex items-center justify-center mb-5">
+                  <Icon size={28} className="text-accent" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3">{v.title}</h3>
+                <p className="text-muted text-sm leading-relaxed">{v.desc}</p>
               </div>
-              <h3 className="text-xl font-semibold mb-3">{v.title}</h3>
-              <p className="text-muted text-sm leading-relaxed">{v.desc}</p>
-            </div>
-          ))}
+            );
+          })}
         </StaggerChildren>
       </div>
     </section>
@@ -143,18 +168,7 @@ function MissionVision() {
 }
 
 /* ───────────── NEDEN BİZ ───────────── */
-const reasons = [
-  "Türkiye'nin önde gelen markalarının yetkili bayisi",
-  "Profesyonel teknik danışmanlık hizmeti",
-  "Rekabetçi fiyat politikası",
-  "Hızlı ve güvenilir teslimat ağı",
-  "TSE ve CE belgeli ürün yelpazesi",
-  "Proje bazlı toplu tedarik imkanı",
-  "Satış sonrası teknik destek",
-  "Uzman ve deneyimli kadro",
-];
-
-function WhyUs() {
+function WhyUs({ reasons }: { reasons: string[] }) {
   return (
     <section className="py-20 bg-accent text-white">
       <div className="mx-auto max-w-7xl px-6 grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
@@ -189,15 +203,15 @@ function WhyUs() {
 }
 
 /* ───────────── KURUCU ───────────── */
-function Founder() {
+function Founder({ data }: { data: typeof fallbackFounder }) {
   return (
     <section className="py-20 bg-background">
       <div className="mx-auto max-w-7xl px-6 grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
         <ScrollReveal animation="fade-right">
           <div className="relative aspect-square max-w-md mx-auto rounded-sm overflow-hidden img-zoom">
             <Image
-              src="/founder.jpg"
-              alt="Mustafa Yılmaz - YapıTek Kurucusu"
+              src={data.image_url || "/founder.jpg"}
+              alt={`${data.name} - YapıTek ${data.title}`}
               fill
               className="object-cover"
               quality={85}
@@ -208,35 +222,34 @@ function Founder() {
         </ScrollReveal>
         <ScrollReveal animation="fade-left" delay={150}>
           <span className="text-accent font-semibold text-sm uppercase tracking-wider">
-            Kurucu
+            {data.title}
           </span>
-          <h2 className="text-3xl font-bold mt-2">Mustafa Yılmaz</h2>
-          <p className="text-muted mt-5 leading-relaxed">
-            YapıTek Taah. Yapı Malzemeleri&apos;nin kurucusu Mustafa Yılmaz,
-            yapı sektöründe 15 yılı aşkın deneyime sahiptir. Sektördeki
-            derin bilgi birikimi ve vizyoner yaklaşımıyla YapıTek&apos;i
-            Türkiye&apos;nin güvenilir yapı malzemeleri tedarikçilerinden
-            biri haline getirmiştir.
-          </p>
-          <p className="text-muted mt-4 leading-relaxed">
-            Müşteri memnuniyetini ve kaliteyi iş felsefesinin merkezine
-            koyan Mustafa Yılmaz, firmanın sürdürülebilir büyümesi ve
-            sektörel gelişimi için çalışmalarına devam etmektedir.
-          </p>
+          <h2 className="text-3xl font-bold mt-2">{data.name}</h2>
+          <p className="text-muted mt-5 leading-relaxed">{data.description}</p>
+          <p className="text-muted mt-4 leading-relaxed">{data.description2}</p>
         </ScrollReveal>
       </div>
     </section>
   );
 }
 
-export default function HakkimizdaPage() {
+export default async function HakkimizdaPage() {
+  const content = await getCorporateContent();
+
+  const about = { ...fallbackAbout, ...content.about } as typeof fallbackAbout;
+  const mission = { ...fallbackMission, ...content.mission } as typeof fallbackMission;
+  const reasons = (content.whyus as { reasons?: string[] })?.reasons?.length
+    ? (content.whyus as { reasons: string[] }).reasons
+    : fallbackReasons;
+  const founder = { ...fallbackFounder, ...content.founder } as typeof fallbackFounder;
+
   return (
     <>
       <PageBanner />
-      <AboutContent />
-      <MissionVision />
-      <WhyUs />
-      <Founder />
+      <AboutContent data={about} />
+      <MissionVision data={mission} />
+      <WhyUs reasons={reasons} />
+      <Founder data={founder} />
       {/* CTA */}
       <ScrollReveal animation="scale-in">
         <section className="py-16 bg-background">

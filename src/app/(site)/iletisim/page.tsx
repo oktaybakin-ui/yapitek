@@ -9,6 +9,7 @@ import {
   Send,
 } from "lucide-react";
 import ScrollReveal, { StaggerChildren } from "@/components/ScrollReveal";
+import { getContactInfo } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "İletişim",
@@ -30,30 +31,30 @@ function PageBanner() {
   );
 }
 
-const contactInfo = [
-  {
-    icon: MapPin,
-    title: "Adres",
-    lines: ["Söğütözü Mah. Söğütözü Cd. No:2/A - 13", "Koç Kuleleri - Çankaya / ANKARA", "06510"],
-  },
-  {
-    icon: Phone,
-    title: "Telefon",
-    lines: ["+90 (532) 301 54 25"],
-  },
-  {
-    icon: Mail,
-    title: "E-posta",
-    lines: ["info@yapitek.tr", "mustafa@yapitek.tr"],
-  },
-  {
-    icon: Clock,
-    title: "Çalışma Saatleri",
-    lines: ["Pazartesi - Cuma: 08:00 - 18:00", "Cumartesi: 09:00 - 15:00", "Pazar: Kapalı"],
-  },
-];
+function ContactInfo({ contact }: { contact: Awaited<ReturnType<typeof getContactInfo>> }) {
+  const infoCards = [
+    {
+      icon: MapPin,
+      title: "Adres",
+      lines: [contact.address, contact.address2, contact.postal_code],
+    },
+    {
+      icon: Phone,
+      title: "Telefon",
+      lines: [contact.phone],
+    },
+    {
+      icon: Mail,
+      title: "E-posta",
+      lines: contact.emails,
+    },
+    {
+      icon: Clock,
+      title: "Çalışma Saatleri",
+      lines: contact.hours,
+    },
+  ];
 
-function ContactInfo() {
   return (
     <section className="py-20 bg-card">
       <div className="mx-auto max-w-7xl px-6">
@@ -62,7 +63,7 @@ function ContactInfo() {
           stagger={100}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
         >
-          {contactInfo.map((info) => (
+          {infoCards.map((info) => (
             <div
               key={info.title}
               className="bg-background rounded border border-border p-6 hover-lift"
@@ -210,14 +211,14 @@ function ContactForm() {
 }
 
 /* ───────────── HARİTA ───────────── */
-function Map() {
+function Map({ query, address }: { query: string; address: string }) {
   return (
     <ScrollReveal animation="fade-in">
       <section className="bg-surface-dark">
         <div className="mx-auto max-w-7xl px-6 py-10">
           <div className="relative rounded border border-white/10 overflow-hidden h-96">
             <iframe
-              src="https://www.google.com/maps?q=Koç+Kuleleri,+Söğütözü+Mahallesi,+Söğütözü+Caddesi,+Çankaya,+Ankara&output=embed"
+              src={`https://www.google.com/maps?q=${query}&output=embed`}
               width="100%"
               height="100%"
               style={{ border: 0, filter: "grayscale(100%) contrast(1.1) invert(92%) hue-rotate(180deg)" }}
@@ -237,7 +238,7 @@ function Map() {
           </div>
           <div className="flex items-center gap-3 mt-4 text-white/50 text-sm">
             <MapPin size={16} className="text-accent" />
-            Söğütözü Mah. Söğütözü Cd. No:2/A-13, Koç Kuleleri, Çankaya/Ankara 06510
+            {address}
           </div>
         </div>
       </section>
@@ -245,13 +246,18 @@ function Map() {
   );
 }
 
-export default function IletisimPage() {
+export default async function IletisimPage() {
+  const contact = await getContactInfo();
+
   return (
     <>
       <PageBanner />
-      <ContactInfo />
+      <ContactInfo contact={contact} />
       <ContactForm />
-      <Map />
+      <Map
+        query={contact.map_query}
+        address={`${contact.address}, ${contact.address2} ${contact.postal_code}`}
+      />
     </>
   );
 }

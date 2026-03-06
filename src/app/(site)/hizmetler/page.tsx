@@ -11,8 +11,16 @@ import {
   ArrowRight,
   CheckCircle,
   Phone,
+  type LucideIcon,
+  Droplets,
+  Paintbrush,
+  Shield,
+  Hammer,
+  Layers,
+  Building2,
 } from "lucide-react";
 import ScrollReveal, { StaggerChildren } from "@/components/ScrollReveal";
+import { getServices } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Hizmetler",
@@ -34,12 +42,19 @@ function PageBanner() {
   );
 }
 
-const services = [
+// İkon eşlemesi
+const iconMap: Record<string, LucideIcon> = {
+  Package, Truck, Users, Wrench, ClipboardList, Warehouse,
+  Droplets, Paintbrush, Shield, Hammer, Layers, Building2,
+};
+
+// Fallback veriler
+const fallbackServices = [
   {
-    icon: Package,
     title: "Toptan ve Perakende Satış",
-    image: "/services/toptan-satis.jpg",
-    desc: "Bireysel müşterilerden büyük inşaat firmalarına kadar her ölçekte satış hizmeti sunuyoruz. Toptan alımlarda özel fiyat avantajları sağlıyoruz.",
+    image_url: "/services/toptan-satis.jpg",
+    icon_name: "Package",
+    description: "Bireysel müşterilerden büyük inşaat firmalarına kadar her ölçekte satış hizmeti sunuyoruz. Toptan alımlarda özel fiyat avantajları sağlıyoruz.",
     features: [
       "Rekabetçi toptan fiyatlar",
       "Perakende satış imkanı",
@@ -48,10 +63,10 @@ const services = [
     ],
   },
   {
-    icon: Users,
     title: "Teknik Danışmanlık",
-    image: "/services/teknik-danismanlik.jpg",
-    desc: "Uzman kadromuz, projenizin ihtiyaçlarına göre en uygun malzeme seçiminde size rehberlik eder. Doğru ürünü doğru yerde kullanmanız için teknik destek sağlıyoruz.",
+    image_url: "/services/teknik-danismanlik.jpg",
+    icon_name: "Users",
+    description: "Uzman kadromuz, projenizin ihtiyaçlarına göre en uygun malzeme seçiminde size rehberlik eder. Doğru ürünü doğru yerde kullanmanız için teknik destek sağlıyoruz.",
     features: [
       "Ücretsiz teknik destek",
       "Proje bazlı malzeme önerileri",
@@ -60,10 +75,10 @@ const services = [
     ],
   },
   {
-    icon: ClipboardList,
     title: "Proje Bazlı Tedarik",
-    image: "/services/proje-tedarik.jpg",
-    desc: "Büyük ölçekli inşaat projeleri için komple malzeme listesi çıkarma ve toplu tedarik hizmeti veriyoruz. Projenizin her aşaması için planlama yapıyoruz.",
+    image_url: "/services/proje-tedarik.jpg",
+    icon_name: "ClipboardList",
+    description: "Büyük ölçekli inşaat projeleri için komple malzeme listesi çıkarma ve toplu tedarik hizmeti veriyoruz. Projenizin her aşaması için planlama yapıyoruz.",
     features: [
       "Metraj ve keşif hizmeti",
       "Toplu malzeme tedariki",
@@ -72,10 +87,10 @@ const services = [
     ],
   },
   {
-    icon: Truck,
     title: "Yerinde Teslimat",
-    image: "/services/teslimat.jpg",
-    desc: "Kendi araç filomuzla şantiyenize veya projenize doğrudan teslimat yapıyoruz. Zamanında ve hasarsız teslimat garantisi sunuyoruz.",
+    image_url: "/services/teslimat.jpg",
+    icon_name: "Truck",
+    description: "Kendi araç filomuzla şantiyenize veya projenize doğrudan teslimat yapıyoruz. Zamanında ve hasarsız teslimat garantisi sunuyoruz.",
     features: [
       "Şantiyeye teslim",
       "Vinç ve forklift ile indirme",
@@ -84,10 +99,10 @@ const services = [
     ],
   },
   {
-    icon: Warehouse,
     title: "Depolama ve Stok Yönetimi",
-    image: "/services/depolama.jpg",
-    desc: "Büyük stok kapasitemiz sayesinde ihtiyaç duyduğunuz ürünleri her zaman hazır bulunduruyoruz. Acil ihtiyaçlarınızda hızlı çözüm sunuyoruz.",
+    image_url: "/services/depolama.jpg",
+    icon_name: "Warehouse",
+    description: "Büyük stok kapasitemiz sayesinde ihtiyaç duyduğunuz ürünleri her zaman hazır bulunduruyoruz. Acil ihtiyaçlarınızda hızlı çözüm sunuyoruz.",
     features: [
       "Geniş stok yelpazesi",
       "Acil sipariş karşılama",
@@ -96,10 +111,10 @@ const services = [
     ],
   },
   {
-    icon: Wrench,
     title: "Satış Sonrası Destek",
-    image: "/services/satis-sonrasi.jpg",
-    desc: "Satış sonrası da yanınızdayız. Ürün uygulaması, sorun giderme ve teknik bilgilendirme konularında destek vermeye devam ediyoruz.",
+    image_url: "/services/satis-sonrasi.jpg",
+    icon_name: "Wrench",
+    description: "Satış sonrası da yanınızdayız. Ürün uygulaması, sorun giderme ve teknik bilgilendirme konularında destek vermeye devam ediyoruz.",
     features: [
       "Uygulama desteği",
       "Sorun giderme rehberliği",
@@ -113,9 +128,10 @@ function ServiceCard({
   service,
   index,
 }: {
-  service: (typeof services)[number];
+  service: { title: string; image_url: string; icon_name: string; description: string; features: string[] };
   index: number;
 }) {
+  const Icon = iconMap[service.icon_name] || Package;
   return (
     <ScrollReveal
       animation={index % 2 === 0 ? "fade-right" : "fade-left"}
@@ -124,7 +140,7 @@ function ServiceCard({
       <div className="bg-card rounded border border-border overflow-hidden hover-lift">
         <div className="relative h-48 md:h-56">
           <Image
-            src={service.image}
+            src={service.image_url || "/services/toptan-satis.jpg"}
             alt={service.title}
             fill
             className="object-cover"
@@ -132,13 +148,13 @@ function ServiceCard({
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
           <div className="absolute bottom-4 left-6 flex items-center gap-3">
             <div className="w-11 h-11 rounded bg-white/20 backdrop-blur-sm flex items-center justify-center">
-              <service.icon size={22} className="text-white" />
+              <Icon size={22} className="text-white" />
             </div>
             <h2 className="text-xl md:text-2xl font-bold text-white">{service.title}</h2>
           </div>
         </div>
         <div className="p-8 md:p-10">
-          <p className="text-muted leading-relaxed">{service.desc}</p>
+          <p className="text-muted leading-relaxed">{service.description}</p>
           <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
             {service.features.map((f) => (
               <li key={f} className="flex items-center gap-2 text-sm">
@@ -193,7 +209,10 @@ function Process() {
   );
 }
 
-export default function HizmetlerPage() {
+export default async function HizmetlerPage() {
+  const dbServices = await getServices();
+  const services = dbServices.length > 0 ? dbServices : fallbackServices;
+
   return (
     <>
       <PageBanner />

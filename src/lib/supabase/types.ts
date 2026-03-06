@@ -29,3 +29,35 @@ export interface Project {
   progress: number;
   sort_order: number;
 }
+
+export interface BrandPartner {
+  id: string;
+  name: string;
+  logo_url: string;
+  category: string;
+  sort_order: number;
+}
+
+export interface Testimonial {
+  id: string;
+  author_name: string;
+  company: string;
+  text: string;
+  sort_order: number;
+}
+
+export interface Service {
+  id: string;
+  title: string;
+  description: string;
+  image_url: string;
+  icon_name: string;
+  features: string[];
+  sort_order: number;
+}
+
+export interface CorporateContent {
+  id: string;
+  data: Record<string, unknown>;
+  updated_at: string;
+}
