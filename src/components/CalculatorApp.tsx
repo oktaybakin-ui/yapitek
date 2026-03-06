@@ -570,25 +570,24 @@ export default function CalculatorApp() {
               <h2 className="text-xs font-semibold uppercase tracking-widest text-secondary mb-3 px-1">
                 Hesaplama Araçları
               </h2>
-              <nav className="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-x-visible pb-2 lg:pb-0">
+              <nav className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-1 gap-2">
                 {calcTypes.map((ct) => {
                   const isActive = ct.id === activeCalc;
                   return (
                     <button
                       key={ct.id}
                       onClick={() => setActiveCalc(ct.id)}
-                      className={`flex items-center gap-3 px-4 py-3 rounded text-sm font-medium transition-all whitespace-nowrap shrink-0 lg:shrink lg:whitespace-normal text-left ${
+                      className={`flex items-center gap-2.5 px-3 py-2.5 lg:px-4 lg:py-3 rounded text-xs lg:text-sm font-medium transition-all text-left ${
                         isActive
                           ? "bg-accent text-white shadow-md"
                           : "bg-white border border-border text-foreground hover:border-accent/30 hover:text-accent"
                       }`}
                     >
                       <ct.icon
-                        size={18}
-                        className={isActive ? "text-white" : "text-accent"}
+                        size={16}
+                        className={`shrink-0 ${isActive ? "text-white" : "text-accent"}`}
                       />
-                      <span className="hidden lg:inline">{ct.label}</span>
-                      <span className="lg:hidden">{ct.label.split(" ")[0]}</span>
+                      <span className="leading-tight">{ct.label}</span>
                       <ChevronRight
                         size={14}
                         className={`ml-auto hidden lg:block transition-transform ${

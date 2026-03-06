@@ -84,7 +84,7 @@ export default function ProductBrowser({
           <h2 className="text-xs font-semibold uppercase tracking-widest text-secondary mb-3 px-1">
             Kategoriler
           </h2>
-          <nav className="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-x-visible pb-2 lg:pb-0">
+          <nav className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-1 gap-2">
             {categories.map((cat) => {
               const CatIcon = iconMap[cat.iconName] || Building2;
               const isActive = cat.id === activeId;
@@ -92,17 +92,17 @@ export default function ProductBrowser({
                 <button
                   key={cat.id}
                   onClick={() => setActiveId(cat.id)}
-                  className={`flex items-center gap-3 px-4 py-3 rounded text-sm font-medium transition-all whitespace-nowrap shrink-0 lg:shrink lg:whitespace-normal text-left ${
+                  className={`flex items-center gap-2.5 px-3 py-2.5 lg:px-4 lg:py-3 rounded text-xs lg:text-sm font-medium transition-all text-left ${
                     isActive
                       ? "bg-accent text-white shadow-md"
                       : "bg-white border border-border text-foreground hover:border-accent/30 hover:text-accent"
                   }`}
                 >
                   <CatIcon
-                    size={18}
-                    className={isActive ? "text-white" : "text-accent"}
+                    size={16}
+                    className={`shrink-0 ${isActive ? "text-white" : "text-accent"}`}
                   />
-                  {cat.title}
+                  <span className="leading-tight">{cat.title}</span>
                   <ChevronRight
                     size={14}
                     className={`ml-auto hidden lg:block transition-transform ${
